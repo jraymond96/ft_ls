@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/02/19 19:56:41 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/02/19 20:55:10 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct	s_fileinfo
 typedef struct			s_binary_tree
 {
 	void			*ptrdata;
-	size_t			content_size;
+	size_t			data_size;
 	struct	s_btree	*parent;
 	struct	s_btree	*left;
 	struct	s_btree	*right;
