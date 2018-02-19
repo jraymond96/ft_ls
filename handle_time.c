@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_time.c                                        :+:      :+:    :+:   */
+/*   handle_time.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/17 22:28:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/02/17 23:11:11 by jraymond         ###   ########.fr       */
+/*   Created: 2018/02/19 15:49:29 by jraymond          #+#    #+#             */
+/*   Updated: 2018/02/19 17:27:23 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 
 void	ft_file_time(struct stat *allstats, t_finfo *file_st)
 {
-	char *time;
+	char 	*file_time;
+	time_t	curr_time;
 
-	time = ctime((const time_t *)&allstats->st_mtime);
-	printf("real time : %s\n", time);
-	ft_strncat(file_st->timeday, (time + 4), 12);
-	printf("TIME : %s\n", file_st->timeday);
+	time(&curr_time);
+	file_time = ctime((const time_t *)&allstats->st_mtime);
+	ft_strncat(file_st->timeday, (file_time + 4), 12);
 	if (ft_strlen(file_st->timeday) != 12)
 		ft_memmove(&file_st->timeday[4], &file_st->timeday[3], 9);
+	if (((int)curr_time - (int)allstats->st_mtime) > 15624439)
+		ft_memmove(&file_st->timeday[7], &file_time[19], 5);
 }

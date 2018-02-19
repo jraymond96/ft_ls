@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/02/17 22:39:09 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:56:41 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <dirent.h>
 # include <time.h>
+# include <grp.h>
+# include <pwd.h>
 # include <stdio.h> /* A ENLEVER */
 
 /*
@@ -27,6 +29,8 @@
 typedef struct	s_fileinfo
 {
 	char	*name;
+	char	*n_id_user;
+	char	*n_id_group;
 	char	mode[11];
 	char	type;
 	char	timeday[13];
@@ -36,6 +40,15 @@ typedef struct	s_fileinfo
 	int		size;
 }				t_finfo;
 
+typedef struct			s_binary_tree
+{
+	void			*ptrdata;
+	size_t			content_size;
+	struct	s_btree	*parent;
+	struct	s_btree	*left;
+	struct	s_btree	*right;
+}						t_btree;
+
 /*
 **----------------------------------FONCTIONS-----------------------------------
 */
@@ -43,5 +56,6 @@ typedef struct	s_fileinfo
 void			ft_handle_mode(struct stat *allstats, t_finfo *file_s);
 void			ft_file_size(struct stat *allstats, t_finfo *file_s);
 void			ft_file_time(struct stat *allstats, t_finfo *file_st);
+void			ft_find_uid_gid(struct stat *allstats, t_finfo *file_st);
 
 # endif

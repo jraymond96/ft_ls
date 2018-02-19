@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/02/17 23:13:00 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/02/19 17:46:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,15 @@ int		main(int argc, char **argv)
 		return (ft_error());
 	fileinfo = readdir(dir);
 	ft_bzero(&file_st, sizeof(t_finfo));
-	lstat("./test/test0.c", &allstats);
+	lstat("./test/dir_test/test1.c", &allstats);
 	ft_file_time(&allstats, &file_st);
-	printf("time : %s\n", file_st.timeday);
 	ft_handle_mode(&allstats, &file_st);
-	printf("mode : %s", file_st.mode);
 	ft_file_size(&allstats, &file_st);
+	ft_find_uid_gid(&allstats, &file_st);
+	printf("n_id_user : %s\n", file_st.n_id_user);
+	printf("n_id_group : %s\n", file_st.n_id_group);
+	printf("time : %s\n", file_st.timeday);
+	printf("mode : %s\n", file_st.mode);
+	printf("size : %d\n", file_st.size);
 	closedir(dir);
 }

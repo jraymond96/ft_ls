@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/02/17 22:40:22 by jraymond         ###   ########.fr        #
+#    Updated: 2018/02/19 17:45:17 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ FLAGS = -Wall -Wextra -Werror
 
 SRCS = handle_mode.c \
 	   handle_time.c \
+	   handle_uid_gid.c \
 	   main.c
 
 #COLORS
