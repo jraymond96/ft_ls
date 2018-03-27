@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 18:25:23 by jraymond          #+#    #+#             */
-/*   Updated: 2018/02/19 21:36:38 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/27 10:10:12 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_btree	*ft_btreeinser_ascii(t_btree *root, void *data, size_t size_data)
 	while (elem)
 	{
 		res = ft_strcmp(((t_test *)data)->name, ((t_test *)elem->ptrdata)->name);
-		elem = (res < 0) ? elem->left : elem->right;
+		elem = (res < 0) ? (t_btree *)elem->left : (t_btree *)elem->right;
 		if (!elem)
 		{
 			elem = parent;
@@ -69,9 +69,9 @@ t_btree	*ft_btreeinser_ascii(t_btree *root, void *data, size_t size_data)
 		parent = elem;
 	}
 	if (res < 0)
-		elem->left = ft_newbtree(data, size_data);
+		elem->left = (struct s_btree *)ft_newbtree(data, size_data);
 	else
-		elem->right = ft_newbtree(data, size_data);
-	elem->parent = parent;
+		elem->right = (struct s_btree *)ft_newbtree(data, size_data);
+	elem->parent = (struct s_btree *)parent;
 	return (root);
 }

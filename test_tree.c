@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_tree.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/27 08:46:39 by jraymond          #+#    #+#             */
+/*   Updated: 2018/03/27 10:12:11 by jraymond         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 #include "lib/libft.h"
 
 t_btree	*ft_btreeinser_ascii(t_btree *root, void *data, size_t size_data);
 
-void	print_tree(t_btree *root)
+void	ft_print_tree(t_btree *root)
 {
 	t_btree	*elem;
-	int	right;
 
-	right = 0;
 	elem = root;
-	while (elem->left)
-	{
-		elem = elem->left;
-	}
+	if (elem->left)
+		ft_print_tree((t_btree *)elem->left);
+	ft_putstr(((t_test *)elem->ptrdata)->name);
+	ft_putchar('\n');
+	if (elem->right)
+		ft_print_tree((t_btree *)elem->right);
 }
 
 int	main(int argc, char **argv)
@@ -33,6 +45,8 @@ int	main(int argc, char **argv)
 		a.name = ft_strdup(argv[i]);
 		a.nb = i++;
 		root = ft_btreeinser_ascii(root, &a, sizeof(t_test));
+		ft_bzero(&a, sizeof(t_test));
 	}
+	ft_print_tree(root);
 	exit (0);
 }

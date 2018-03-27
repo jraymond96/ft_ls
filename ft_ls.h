@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/02/19 20:55:10 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/27 09:50:02 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,34 @@
 **-----------------------------------STRUCTS------------------------------------
 */
 
-typedef struct	s_fileinfo
+typedef struct			s_fileinfo
 {
-	char	*name;
-	char	*n_id_user;
-	char	*n_id_group;
-	char	mode[11];
-	char	type;
-	char	timeday[13];
-	time_t	time_u; /*flags u (st_atime)*/
-	time_t	time_n;
-	time_t	time_c; /*flags c (st_ctime)*/
-	int		size;
-}				t_finfo;
+	char				*name;
+	char				*n_id_user;
+	char				*n_id_group;
+	char				mode[11];
+	char				type;
+	char				timeday[13];
+	time_t				time_u; /*flags u (st_atime)*/
+	time_t				time_n;
+	time_t				time_c; /*flags c (st_ctime)*/
+	int					size;
+}						t_finfo;
 
 typedef struct			s_binary_tree
 {
-	void			*ptrdata;
-	size_t			data_size;
-	struct	s_btree	*parent;
-	struct	s_btree	*left;
-	struct	s_btree	*right;
+	void				*ptrdata;
+	size_t				data_size;
+	struct	s_btree		*parent;
+	struct	s_btree		*left;
+	struct	s_btree		*right;
 }						t_btree;
+
+typedef struct			s_test
+{
+	char				*name;
+	int					nb;
+}						t_test;
 
 /*
 **----------------------------------FONCTIONS-----------------------------------
