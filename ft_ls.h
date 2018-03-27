@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/27 11:36:41 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/27 15:03:14 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct			s_test
 
 t_btree					*ft_btreeinser_ascii(t_btree *root, void *data,
 						size_t size_data);
+void					ft_print_tree(t_btree *root);
 
 /*
 **----------------------------------FONCTIONS-----------------------------------

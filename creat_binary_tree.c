@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 18:25:23 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/27 10:10:12 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/27 15:19:07 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ t_btree *ft_newbtree(void const *data, size_t size_data)
 	}
 	return (new);
 }
+
+/*
+**int		ft_compdata(void *data , void *data2, size_t data_size)
+**{
+**	int	res;
+**
+**	res = ft_strcmp(data, data2);
+**	(void)data_size;
+**	return (res);
+**}
+*/
 
 t_btree	*ft_btreeinser_ascii(t_btree *root, void *data, size_t size_data)
 {

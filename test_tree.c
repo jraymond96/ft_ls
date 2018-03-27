@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 08:46:39 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/27 11:30:48 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/27 14:34:03 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,28 @@ void	ft_print_tree(t_btree *root)
 		ft_print_tree((t_btree *)elem->right);
 }
 
-int	main(int argc, char **argv)
-{
-	t_test	a;
-	t_btree	*root;
-	int	i;
-	
-	i = 1;
-	root = NULL;
-	if (argc < 2)
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	while (argv[i])
-	{
-		a.name = ft_strdup(argv[i]);
-		a.nb = i++;
-		root = ft_btreeinser_ascii(root, &a, sizeof(t_test));
-		ft_bzero(&a, sizeof(t_test));
-	}
-	ft_print_tree(root);
-	exit (0);
-}
+/*
+** int	main(int argc, char **argv)
+** {
+**	t_test	a;
+**	t_btree	*root;
+**	int	i;
+**	
+**	i = 1;
+**	root = NULL;
+**	if (argc < 2)
+**	{
+**		ft_putstr("error\n");
+**		return (0);
+**	}
+**	while (argv[i])
+**	{
+**		a.name = ft_strdup(argv[i]);
+**		a.nb = i++;
+**		root = ft_btreeinser_ascii(root, &a, sizeof(t_test));
+**		ft_bzero(&a, sizeof(t_test));
+**	}
+**	ft_print_tree(root);
+**	exit (0);
+** }
+*/
