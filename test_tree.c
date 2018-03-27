@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 08:46:39 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/27 10:12:11 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/27 11:30:48 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv)
 	int	i;
 	
 	i = 1;
+	root = NULL;
 	if (argc < 2)
 	{
 		ft_putstr("error\n");
