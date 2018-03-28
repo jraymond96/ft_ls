@@ -6,14 +6,14 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 18:25:23 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/27 15:19:07 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/28 09:39:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/libft.h"
 #include "ft_ls.h"
 
-t_btree	*ft_creat_elem(void)
+t_btree	*ft_creat_belem(void)
 {
 	t_btree	*new;
 	size_t	size;
@@ -28,7 +28,7 @@ t_btree *ft_newbtree(void const *data, size_t size_data)
 {
 	t_btree	*new;
 
-	if (!(new = ft_creat_elem()))
+	if (!(new = ft_creat_belem()))
 		return (NULL);
 	if (!data || !size_data)
 	{

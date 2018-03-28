@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/27 18:21:27 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/28 10:03:15 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,32 @@ int		ft_recur_solve(char *path, DIR *dir)
 	struct stat		 allstats;
 	t_finfo			file_st;
 	t_btree			*root;
-	t_bis_list		*list;
+	t_list			*b_list;
+	t_list			*elem;
+	int				i;
 
 	root = NULL;
-	list = NULL;
+	elem = NULL;
+	b_list = NULL;
 	while ((fileinfo = readdir(dir)))
 	{
 		ft_bzero(&file_st, sizeof(t_finfo));
 		file_st.name = fileinfo->d_name;
 		ft_recover_infofile(&allstats, path, &file_st);
 		if (file_st.mode[0] == 'd')
-			list = ft_creat_elem((char *)file_st.name)
-		ft_putchar('\n');
+		{
+			elem = ft_lstnew(file_st.name, sizeof(char *));
+			ft_lstaddback(&b_list, elem);
+		}
 		root = ft_btreeinser_ascii(root, (t_finfo *)&file_st, sizeof(t_finfo));
+	}
+	i = 0;
+	elem = b_list;
+	while (b_list)
+	{
+		ft_putstr(b_list->content);
+		ft_putchar('\n');
+		b_list = b_list->next;
 	}
 	ft_print_tree(root);
 	return (0);
