@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/28 12:41:11 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/29 12:30:24 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ t_btree	*ft_take_files_infos(char *path, DIR *dir, t_list **b_list)
 		ft_recover_infofile(&allstats, path, file_st);
 		if (file_st->mode[0] == 'd' && file_st->name[0] != '.')
 		{
+			//ft_putstr("name :");
+			//ft_putendl(file_st->name);
+			ft_putnbr(ft_strlen(file_st->name));
 			elem = ft_lstnew(file_st->name, ft_strlen(file_st->name));
-			//ft_putstr("d_name : ");
-			//ft_putendl(elem->content);
+			ft_putstr("name :");
+			ft_putnbr(ft_strlen(elem->content));
+			ft_putendl(elem->content);
 			ft_lstaddback(b_list, elem);
 		}
 		root = ft_btreeinser_ascii(root, (t_finfo *)file_st, sizeof(t_finfo));
@@ -70,30 +74,27 @@ int		ft_recur_solve(char *path, DIR *dir)
 
 	b_list = NULL;
 	ft_putendl(path);
-	ft_putstr("tftf\n");
 	root = ft_take_files_infos(path, dir, &b_list);
 	elem = b_list;
-	ft_putstr("\n------------------------------------------------------\n");
-	while (elem)
-	{
-		ft_putendl(elem->content);
-		elem = elem->next;
-	}
-	ft_putstr("\n------------------------------------------------------\n");
-	elem = b_list;
 	all_path = ft_strjoin(path, "/");
+	ft_putendl(all_path);
 	ft_print_tree(root);
 	while (elem)
 	{
-		ft_putendl(all_path);
-		ft_putstr("name : ");
+		path = all_path;
 		ft_putendl(elem->content);
-		ft_putstr("toto\n");
-		all_path = ft_strjoin_free(all_path, elem->content, 1);
+		all_path = ft_strjoin(all_path, elem->content);
+		ft_putstr("zzzzzzzzzzzz**************zzzzzzzzzzzz\n");
 		ft_recur_solve(all_path, opendir(all_path));
+		ft_putstr("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\n");
+		ft_memdel((void **)&all_path);
+		all_path = path;
 		elem = elem->next;
 	}
-	ft_putstr("\n------------------------------------------------------\n");
+	/*
+	 * penser a free root et b_list
+	 * */
+	ft_memdel((void **)&all_path);
 	return (0);
 }
 
@@ -115,6 +116,7 @@ int		main(int argc, char **argv)
 		path = ft_strdup(argv[1]);
 	}
 	ft_recur_solve(path, dir);
+	ft_memdel((void **)&path);
 	closedir(dir);
 	return (0);
 }
