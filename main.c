@@ -6,13 +6,14 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/29 12:30:24 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/29 16:51:59 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/libft.h"
 #include "ft_ls.h"
 #include <time.h>
+#include <locale.h>
 
 int		ft_error(void)
 {
@@ -35,6 +36,41 @@ int		ft_recover_infofile(struct stat *allstats, char *path, t_finfo *file_st)
 	return (0);
 }
 
+t_list	*ft_lst_sort(t_list *b_list)
+{
+	t_list	*elem;
+	t_list	*tmp;
+	t_list	*lat;
+
+	elem = b_list;
+	if (b_list == NULL)
+		return (NULL);
+	while (elem->next)
+	{
+		if (ft_strcmp(elem->content, elem->next->content) > 0)
+		{
+			if (elem == b_list)
+			{
+				b_list = elem->next;
+				tmp = b_list->next;
+				b_list->next = elem;
+				elem->next = tmp;
+			}
+			else
+			{	
+				lat = elem->next;
+				tmp = lat->next;
+				lat->next = elem;
+				elem->next = tmp;
+			}
+			elem = b_list;
+		}
+		else
+			elem = elem->next;
+	}
+	return (b_list);
+}
+
 t_btree	*ft_take_files_infos(char *path, DIR *dir, t_list **b_list)
 {
 	struct dirent 	*fileinfo;
@@ -51,13 +87,7 @@ t_btree	*ft_take_files_infos(char *path, DIR *dir, t_list **b_list)
 		ft_recover_infofile(&allstats, path, file_st);
 		if (file_st->mode[0] == 'd' && file_st->name[0] != '.')
 		{
-			//ft_putstr("name :");
-			//ft_putendl(file_st->name);
-			ft_putnbr(ft_strlen(file_st->name));
-			elem = ft_lstnew(file_st->name, ft_strlen(file_st->name));
-			ft_putstr("name :");
-			ft_putnbr(ft_strlen(elem->content));
-			ft_putendl(elem->content);
+			elem = ft_lstnew(file_st->name, (ft_strlen(file_st->name) + 1));
 			ft_lstaddback(b_list, elem);
 		}
 		root = ft_btreeinser_ascii(root, (t_finfo *)file_st, sizeof(t_finfo));
@@ -73,20 +103,33 @@ int		ft_recur_solve(char *path, DIR *dir)
 	char			*all_path;
 
 	b_list = NULL;
-	ft_putendl(path);
 	root = ft_take_files_infos(path, dir, &b_list);
+	ft_putstr("---------------NO_SORT-----------\n");
 	elem = b_list;
+	while (elem)
+	{
+		ft_putendl((char *)elem->content);
+		elem = elem->next;
+	}
+	elem = b_list;
+	ft_putstr("----------------------------------\n");
+	b_list = ft_lst_sort(b_list);
+	elem = b_list;
+	ft_putstr("------------------SORT------------\n");
+	while (elem)
+	{
+		ft_putendl((char *)elem->content);
+		elem = elem->next;
+	}
+	elem = b_list;
+	ft_putstr("---------------------------------\n");
 	all_path = ft_strjoin(path, "/");
-	ft_putendl(all_path);
 	ft_print_tree(root);
 	while (elem)
 	{
 		path = all_path;
-		ft_putendl(elem->content);
 		all_path = ft_strjoin(all_path, elem->content);
-		ft_putstr("zzzzzzzzzzzz**************zzzzzzzzzzzz\n");
 		ft_recur_solve(all_path, opendir(all_path));
-		ft_putstr("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\n");
 		ft_memdel((void **)&all_path);
 		all_path = path;
 		elem = elem->next;
@@ -102,7 +145,7 @@ int		main(int argc, char **argv)
 {
 	DIR				*dir;
 	char			*path;
-	
+
 	if (argc != 2)
 	{
 		if (!(dir = opendir("./")))

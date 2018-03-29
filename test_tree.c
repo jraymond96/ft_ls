@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 08:46:39 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/27 14:34:03 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/29 13:51:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ void	ft_print_tree(t_btree *root)
 	elem = root;
 	if (elem->left)
 		ft_print_tree((t_btree *)elem->left);
-	ft_putstr(((t_test *)elem->ptrdata)->name);
-	ft_putchar('\n');
+	if (((t_finfo *)elem->ptrdata)->name[0] != '.')
+	{
+		ft_putstr(((t_test *)elem->ptrdata)->name);
+		ft_putchar('\n');
+	}
 	if (elem->right)
 		ft_print_tree((t_btree *)elem->right);
 }
