@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/30 13:56:31 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/30 17:03:33 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct			s_fileinfo
 	int					size;
 }						t_finfo;
 
-typedef struct			s_binary_tree
+typedef struct			s_btree
 {
 	void				*ptrdata;
 	size_t				data_size;

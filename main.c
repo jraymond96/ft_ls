@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/30 15:18:37 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/30 19:04:50 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,22 @@ t_btree	*ft_take_files_infos(char *path, DIR *dir, t_list **b_list)
 {
 	struct dirent 	*fileinfo;
 	struct stat		 allstats;
-	t_finfo			*file_st;
+	t_finfo			file_st;
 	t_btree			*root;
-	//t_list			*elem;
+	t_list			*elem;
 	
 	root = NULL;
 	while ((fileinfo = readdir(dir)))
 	{
-		file_st = ft_memalloc(sizeof(t_finfo));
-		file_st->name = ft_strdup(fileinfo->d_name);
-		ft_recover_infofile(&allstats, path, file_st);
-	/*	if (file_st->mode[0] == 'd' && file_st->name[0] != '.')
+		ft_bzero(&file_st, sizeof(t_finfo));
+		file_st.name = ft_strdup(fileinfo->d_name);
+		ft_recover_infofile(&allstats, path, &file_st);
+		if (file_st->mode[0] == 'd' && file_st->name[0] != '.')
 		{
 			elem = ft_lstnew(file_st->name, (ft_strlen(file_st->name) + 1));
 			ft_lstaddback(b_list, elem);
-		}*/
-		root = ft_btreeinser_ascii(root, (t_finfo *)file_st, sizeof(t_finfo));
+		}
+		root = ft_btreeinser_ascii(root, &file_st, sizeof(t_finfo));
 	}
 	b_list = NULL;
 	return (root);
@@ -131,7 +131,6 @@ int		ft_recur_solve(char *path, DIR *dir)
 	return (0);
 }
 
-/*
 int		main(int argc, char **argv)
 {
 	DIR				*dir;
@@ -154,7 +153,7 @@ int		main(int argc, char **argv)
 	closedir(dir);
 	return (0);
 }
-*/	
+
 /* 
 ** printf("n_id_user : %s\n", file_st.n_id_user);
 ** printf("n_id_group : %s\n", file_st.n_id_group);
