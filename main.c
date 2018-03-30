@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/29 16:51:59 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:18:37 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ t_list	*ft_lst_sort(t_list *b_list)
 	t_list	*elem;
 	t_list	*tmp;
 	t_list	*lat;
+	t_list 	*parent;
 
 	elem = b_list;
 	if (b_list == NULL)
 		return (NULL);
+	parent = NULL;
 	while (elem->next)
 	{
 		if (ft_strcmp(elem->content, elem->next->content) > 0)
@@ -57,16 +59,20 @@ t_list	*ft_lst_sort(t_list *b_list)
 				elem->next = tmp;
 			}
 			else
-			{	
+			{
 				lat = elem->next;
 				tmp = lat->next;
 				lat->next = elem;
 				elem->next = tmp;
+				parent->next = lat;
 			}
 			elem = b_list;
 		}
 		else
+		{
+			parent = elem;
 			elem = elem->next;
+		}
 	}
 	return (b_list);
 }
@@ -77,7 +83,7 @@ t_btree	*ft_take_files_infos(char *path, DIR *dir, t_list **b_list)
 	struct stat		 allstats;
 	t_finfo			*file_st;
 	t_btree			*root;
-	t_list			*elem;
+	//t_list			*elem;
 	
 	root = NULL;
 	while ((fileinfo = readdir(dir)))
@@ -85,13 +91,14 @@ t_btree	*ft_take_files_infos(char *path, DIR *dir, t_list **b_list)
 		file_st = ft_memalloc(sizeof(t_finfo));
 		file_st->name = ft_strdup(fileinfo->d_name);
 		ft_recover_infofile(&allstats, path, file_st);
-		if (file_st->mode[0] == 'd' && file_st->name[0] != '.')
+	/*	if (file_st->mode[0] == 'd' && file_st->name[0] != '.')
 		{
 			elem = ft_lstnew(file_st->name, (ft_strlen(file_st->name) + 1));
 			ft_lstaddback(b_list, elem);
-		}
+		}*/
 		root = ft_btreeinser_ascii(root, (t_finfo *)file_st, sizeof(t_finfo));
 	}
+	b_list = NULL;
 	return (root);
 }
 
@@ -104,25 +111,8 @@ int		ft_recur_solve(char *path, DIR *dir)
 
 	b_list = NULL;
 	root = ft_take_files_infos(path, dir, &b_list);
-	ft_putstr("---------------NO_SORT-----------\n");
-	elem = b_list;
-	while (elem)
-	{
-		ft_putendl((char *)elem->content);
-		elem = elem->next;
-	}
-	elem = b_list;
-	ft_putstr("----------------------------------\n");
 	b_list = ft_lst_sort(b_list);
 	elem = b_list;
-	ft_putstr("------------------SORT------------\n");
-	while (elem)
-	{
-		ft_putendl((char *)elem->content);
-		elem = elem->next;
-	}
-	elem = b_list;
-	ft_putstr("---------------------------------\n");
 	all_path = ft_strjoin(path, "/");
 	ft_print_tree(root);
 	while (elem)
@@ -141,6 +131,7 @@ int		ft_recur_solve(char *path, DIR *dir)
 	return (0);
 }
 
+/*
 int		main(int argc, char **argv)
 {
 	DIR				*dir;
@@ -163,7 +154,7 @@ int		main(int argc, char **argv)
 	closedir(dir);
 	return (0);
 }
-	
+*/	
 /* 
 ** printf("n_id_user : %s\n", file_st.n_id_user);
 ** printf("n_id_group : %s\n", file_st.n_id_group);

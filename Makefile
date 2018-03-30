@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/03/29 10:35:08 by jraymond         ###   ########.fr        #
+#    Updated: 2018/03/30 13:54:28 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ SRCS = handle_mode.c \
 	   handle_uid_gid.c \
 	   main.c \
 	   creat_binary_tree.c \
-	   test_tree.c
+	   test_tree.c \
+	   free_btree.c \
+	   ft_btreedel.c
 
 #COLORS
 

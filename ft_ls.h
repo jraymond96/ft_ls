@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/27 15:03:14 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/03/30 13:56:31 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <time.h>
 # include <grp.h>
 # include <pwd.h>
+# include "lib/libft.h"
 # include <stdio.h> /* A ENLEVER */
 
 /*
@@ -71,5 +72,13 @@ void			ft_handle_mode(struct stat *allstats, t_finfo *file_s);
 void			ft_file_size(struct stat *allstats, t_finfo *file_s);
 void			ft_file_time(struct stat *allstats, t_finfo *file_st);
 void			ft_find_uid_gid(struct stat *allstats, t_finfo *file_st);
+
+
+int				ft_recover_infofile(struct stat *allstats,
+				char *path, t_finfo *file_st);
+t_list			*ft_lst_sort(t_list *b_list);
+t_btree			*ft_take_files_infos(char *path, DIR *dir, t_list **b_list);
+int				ft_recur_solve(char *path, DIR *dir);
+void			ft_btreedel(t_btree **root, void (*btdel)(void *));
 
 # endif
