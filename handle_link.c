@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del_btdel.c                                        :+:      :+:    :+:   */
+/*   handle_link.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 15:44:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/03 20:30:09 by jraymond         ###   ########.fr       */
+/*   Created: 2018/04/03 20:18:44 by jraymond          #+#    #+#             */
+/*   Updated: 2018/04/03 20:27:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/libft.h"
 #include "ft_ls.h"
 
-void	del(void *elem, size_t content_size)
+char	*ft_handle_link(char *path)
 {
-	content_size = 1;
-	free(elem);
-}
+	char	buf[512];
+	char	*link;
+	int		ret;
 
-void	btdel(void *elem)
-{
-	ft_memdel((void **)&((t_finfo *)elem)->name);
-	ft_memdel((void **)&((t_finfo *)elem)->link);
-	ft_memdel((void **)&((t_finfo *)elem)->n_id_user);
-	ft_memdel((void **)&((t_finfo *)elem)->n_id_group);
-	ft_memdel(&elem);
+	ret = readlink(path, buf, 512);
+	if (ret == -1)
+		return (NULL);
+	else
+	{
+		link = ft_memalloc(ret + 1);
+		ft_strncpy(link, buf, ret);
+	}
+	return (link);
 }

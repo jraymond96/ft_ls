@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/03 18:53:32 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:38:00 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		ft_recover_infofile(struct stat *allstats, char *path, t_finfo *file_st)
 
 	all_path = ft_strjoin(path, "/");
 	all_path = ft_strjoin_free(all_path, file_st->name, 1);
+	file_st->link = ft_handle_link(all_path);
+	file_st->n_link = allstats->st_nlink;
 	lstat(all_path, allstats);
 	ft_file_time(allstats, file_st);
 	ft_handle_mode(allstats, file_st);
