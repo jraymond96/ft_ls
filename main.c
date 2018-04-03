@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/30 19:04:50 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/03 18:53:32 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,29 @@ t_btree	*ft_take_files_infos(char *path, DIR *dir, t_list **b_list)
 		ft_bzero(&file_st, sizeof(t_finfo));
 		file_st.name = ft_strdup(fileinfo->d_name);
 		ft_recover_infofile(&allstats, path, &file_st);
-		if (file_st->mode[0] == 'd' && file_st->name[0] != '.')
+		if (file_st.mode[0] == 'd' && file_st.name[0] != '.')
 		{
-			elem = ft_lstnew(file_st->name, (ft_strlen(file_st->name) + 1));
+			elem = ft_lstnew(file_st.name, (ft_strlen(file_st.name) + 1));
 			ft_lstaddback(b_list, elem);
 		}
 		root = ft_btreeinser_ascii(root, &file_st, sizeof(t_finfo));
 	}
 	b_list = NULL;
 	return (root);
+}
+
+void	ft_free_all(t_list **list, t_btree **root, DIR *dir, char **path)
+{
+	void	*ptr_tl;
+	void	*ptr_tbt;
+
+	ptr_tl = del;
+	ptr_tbt = btdel;
+
+	ft_lstdel(list, ptr_tl);
+	ft_btreedel(root, ptr_tbt);
+	ft_memdel((void **)path);
+	closedir(dir);
 }
 
 int		ft_recur_solve(char *path, DIR *dir)
@@ -124,10 +138,7 @@ int		ft_recur_solve(char *path, DIR *dir)
 		all_path = path;
 		elem = elem->next;
 	}
-	/*
-	 * penser a free root et b_list
-	 * */
-	ft_memdel((void **)&all_path);
+	ft_free_all(&b_list, &root, dir, &all_path);
 	return (0);
 }
 
@@ -150,14 +161,5 @@ int		main(int argc, char **argv)
 	}
 	ft_recur_solve(path, dir);
 	ft_memdel((void **)&path);
-	closedir(dir);
 	return (0);
 }
-
-/* 
-** printf("n_id_user : %s\n", file_st.n_id_user);
-** printf("n_id_group : %s\n", file_st.n_id_group);
-** printf("time : %s\n", file_st.timeday);
-** printf("mode : %s\n", file_st.mode);
-** printf("size : %d\n", file_st.size);
-*/

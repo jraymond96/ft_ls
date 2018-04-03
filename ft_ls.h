@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/03/30 17:03:33 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/03 18:36:44 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,6 @@ typedef struct			s_fileinfo
 	int					size;
 }						t_finfo;
 
-typedef struct			s_btree
-{
-	void				*ptrdata;
-	size_t				data_size;
-	struct	s_btree		*parent;
-	struct	s_btree		*left;
-	struct	s_btree		*right;
-}						t_btree;
-
-typedef struct			s_test
-{
-	char				*name;
-	int					nb;
-}						t_test;
-
-/*
-**--------------------------------BTREE-FONCTIONS-------------------------------
-*/
-
-t_btree					*ft_btreeinser_ascii(t_btree *root, void *data,
-						size_t size_data);
-void					ft_print_tree(t_btree *root);
-
 /*
 **----------------------------------FONCTIONS-----------------------------------
 */
@@ -79,6 +56,8 @@ int				ft_recover_infofile(struct stat *allstats,
 t_list			*ft_lst_sort(t_list *b_list);
 t_btree			*ft_take_files_infos(char *path, DIR *dir, t_list **b_list);
 int				ft_recur_solve(char *path, DIR *dir);
-void			ft_btreedel(t_btree **root, void (*btdel)(void *));
+void			del(void *elem, size_t content_size);
+void			btdel(void *elem);
+void			ft_print_tree(t_btree *root);
 
 # endif

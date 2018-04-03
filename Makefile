@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/03/30 19:24:03 by jraymond         ###   ########.fr        #
+#    Updated: 2018/04/03 18:40:28 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRCS = handle_mode.c \
 	   handle_time.c \
 	   handle_uid_gid.c \
 	   main.c \
+	   del_btdel.c \
+	   ft_print_btree.c
 
 #COLORS
 
@@ -49,4 +51,6 @@ fclean : clean
 		@rm -rf $(NAME)
 		@echo "$(_RED)fclean : $(_GREEN)Done$(_END)"
 
-re : fclean all
+re :
+	@make fclean
+	@make
