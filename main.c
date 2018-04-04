@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/03 20:38:00 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/04 15:07:30 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,22 @@ int		ft_error(void)
 	return (0);
 }
 
-int		ft_recover_infofile(struct stat *allstats, char *path, t_finfo *file_st)
+int		ft_z(struct stat *allstats, char *path, t_finfo *file_st, t_lenmax *max)
 {
 	char	*all_path;
+	int		len;
 
 	all_path = ft_strjoin(path, "/");
 	all_path = ft_strjoin_free(all_path, file_st->name, 1);
 	file_st->link = ft_handle_link(all_path);
-	file_st->n_link = allstats->st_nlink;
 	lstat(all_path, allstats);
+	if ((len = ft_ilen(allstats->st_nlink)) > max->lenmax_link)
+		max->lenmax_link = len;
+	file_st->n_link = allstats->st_nlink;
 	ft_file_time(allstats, file_st);
 	ft_handle_mode(allstats, file_st);
-	ft_file_size(allstats, file_st);
-	ft_find_uid_gid(allstats, file_st);
+	ft_file_size(allstats, file_st, max);
+	ft_find_uid_gid(allstats, file_st, max);
 	ft_memdel((void **)&all_path);
 	return (0);
 }
@@ -43,7 +46,7 @@ t_list	*ft_lst_sort(t_list *b_list)
 	t_list	*elem;
 	t_list	*tmp;
 	t_list	*lat;
-	t_list 	*parent;
+	t_list	*parent;
 
 	elem = b_list;
 	if (b_list == NULL)
@@ -79,20 +82,20 @@ t_list	*ft_lst_sort(t_list *b_list)
 	return (b_list);
 }
 
-t_btree	*ft_take_files_infos(char *path, DIR *dir, t_list **b_list)
+t_btree	*ft_take_infofile(char *path, DIR *dir, t_list **b_list, t_lenmax *max)
 {
-	struct dirent 	*fileinfo;
-	struct stat		 allstats;
+	struct dirent	*fileinfo;
+	struct stat		allstats;
 	t_finfo			file_st;
 	t_btree			*root;
 	t_list			*elem;
-	
+
 	root = NULL;
 	while ((fileinfo = readdir(dir)))
 	{
 		ft_bzero(&file_st, sizeof(t_finfo));
 		file_st.name = ft_strdup(fileinfo->d_name);
-		ft_recover_infofile(&allstats, path, &file_st);
+		ft_z(&allstats, path, &file_st, max);
 		if (file_st.mode[0] == 'd' && file_st.name[0] != '.')
 		{
 			elem = ft_lstnew(file_st.name, (ft_strlen(file_st.name) + 1));
@@ -111,7 +114,6 @@ void	ft_free_all(t_list **list, t_btree **root, DIR *dir, char **path)
 
 	ptr_tl = del;
 	ptr_tbt = btdel;
-
 	ft_lstdel(list, ptr_tl);
 	ft_btreedel(root, ptr_tbt);
 	ft_memdel((void **)path);
@@ -123,14 +125,17 @@ int		ft_recur_solve(char *path, DIR *dir)
 	t_btree			*root;
 	t_list			*b_list;
 	t_list			*elem;
+	t_lenmax		lenmax;
 	char			*all_path;
 
 	b_list = NULL;
-	root = ft_take_files_infos(path, dir, &b_list);
+	ft_bzero(&lenmax, sizeof(t_lenmax));
+	root = ft_take_infofile(path, dir, &b_list, &lenmax);
 	b_list = ft_lst_sort(b_list);
 	elem = b_list;
 	all_path = ft_strjoin(path, "/");
-	ft_print_tree(root);
+	ft_print_tree(root, &lenmax);
+	/*
 	while (elem)
 	{
 		path = all_path;
@@ -139,7 +144,7 @@ int		ft_recur_solve(char *path, DIR *dir)
 		ft_memdel((void **)&all_path);
 		all_path = path;
 		elem = elem->next;
-	}
+	}*/
 	ft_free_all(&b_list, &root, dir, &all_path);
 	return (0);
 }

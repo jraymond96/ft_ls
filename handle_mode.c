@@ -6,16 +6,20 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:50:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/03 18:35:25 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/04 13:36:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "lib/libft.h"
 
-void	ft_file_size(struct stat *allstats, t_finfo *file_st)
+void	ft_file_size(struct stat *allstats, t_finfo *file_st, t_lenmax *max)
 {
+	int	len;
+
 	file_st->size = allstats->st_size;
+	if ((len = ft_ilen(file_st->size)) > max->lenmax_oct)
+		max->lenmax_oct = len;
 }
 
 char	ft_file_type(struct stat *allstats)
