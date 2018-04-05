@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/05 12:52:42 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:46:14 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,18 @@ typedef	struct			s_info_padding
 	int					lenmax_g;
 	int					lenmax_oct;
 	int					lenmax_link;
-	char				flags;
+	int					flags;
 }						t_lenmax;
+
+/*
+**-------------------------------------MASK-------------------------------------
+*/
+
+# define MAX_R (1 << 0)
+# define MIN_L (1 << 1)
+# define MIN_A (1 << 2)
+# define MIN_R (1 << 3)
+# define MIN_T (1 << 4)
 
 /*
 **----------------------------------FONCTIONS-----------------------------------
@@ -75,5 +85,6 @@ char			*ft_handle_link(char *path);
 int				ft_takeopt(char const **argv, const char *optstring,
 								char **opt);
 int				ft_erroropt(int i, char const ** argv);
+int				ft_binaryflags(char *flags);
 
 # endif

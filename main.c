@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/05 12:55:13 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/05 16:59:19 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,13 +151,27 @@ int		ft_recur_solve(char *path, DIR *dir)
 
 int		main(int argc, char **argv)
 {
-	DIR				*dir;
-	char			*path;
+//	DIR				*dir;
+//	char			*path;
 	char			*opt;
 	int				i;
+	int				flags;
 
+	(void)argc;
+	flags = 0;
+	opt = NULL;
 	if ((i = ft_takeopt((const char **)argv, "Ralrt", &opt)) > 0)
+	{
+		if (opt)
+		{
+			ft_putstr("toto\n");
+			ft_memdel((void **)opt);
+		}
 		return (ft_erroropt(i, (const char **)argv));
+	}
+	ft_putnbr(ft_binaryflags(opt));
+	return (0);
+	/*dir = ft_takefile(&argv[i]);
 	return (0);
 	if (i == (argc - 1))
 	{
@@ -173,5 +187,5 @@ int		main(int argc, char **argv)
 	}
 	ft_recur_solve(path, dir);
 	ft_memdel((void **)&path);
-	return (0);
+	return (0);*/
 }
