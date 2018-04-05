@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/04 14:45:07 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/05 12:52:42 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef	struct			s_info_padding
 	int					lenmax_g;
 	int					lenmax_oct;
 	int					lenmax_link;
+	char				flags;
 }						t_lenmax;
 
 /*
@@ -71,5 +72,8 @@ void			del(void *elem, size_t content_size);
 void			btdel(void *elem);
 void			ft_print_tree(t_btree *root, t_lenmax *max);
 char			*ft_handle_link(char *path);
+int				ft_takeopt(char const **argv, const char *optstring,
+								char **opt);
+int				ft_erroropt(int i, char const ** argv);
 
 # endif

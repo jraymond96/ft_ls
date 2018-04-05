@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/04/03 20:27:37 by jraymond         ###   ########.fr        #
+#    Updated: 2018/04/05 11:09:51 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS = handle_mode.c \
 	   main.c \
 	   del_btdel.c \
 	   ft_print_btree.c \
-	   handle_link.c
+	   handle_link.c \
+	   ft_takeopt.c
 
 #COLORS
 
