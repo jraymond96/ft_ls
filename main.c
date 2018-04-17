@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/05 16:59:19 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/17 06:16:21 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,23 +153,16 @@ int		main(int argc, char **argv)
 {
 //	DIR				*dir;
 //	char			*path;
+	t_lenmax		titi;
 	char			*opt;
-	int				i;
 	int				flags;
+	t_btree			*param;
 
 	(void)argc;
-	flags = 0;
 	opt = NULL;
-	if ((i = ft_takeopt((const char **)argv, "Ralrt", &opt)) > 0)
-	{
-		if (opt)
-		{
-			ft_putstr("toto\n");
-			ft_memdel((void **)opt);
-		}
-		return (ft_erroropt(i, (const char **)argv));
-	}
-	ft_putnbr(ft_binaryflags(opt));
+	flags = ft_option_management((const char **)argv, "Ralrt", &opt);
+	param = ft_sorting_param((char const **)argv);
+	ft_print_tree(param->left, &titi);
 	return (0);
 	/*dir = ft_takefile(&argv[i]);
 	return (0);

@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_takeopt.c                                       :+:      :+:    :+:   */
+/*   option_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/05 10:23:23 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/05 16:57:52 by jraymond         ###   ########.fr       */
+/*   Created: 2018/04/17 01:09:43 by jraymond          #+#    #+#             */
+/*   Updated: 2018/04/17 01:30:20 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-int		ft_erroropt(int i, char const **argv)
-{
-	ft_putstr("ls: illegal option -- ");
-	ft_putchar(argv[i / 10][i % 10]);
-	ft_putendl("\nusage: ls [-Ralrt] [file ...]");
-	return (0);
-}
 
 void	ft_applymask(int *i, char flags)
 {
@@ -70,7 +62,27 @@ int		ft_takeopt(char const **argv, const char *optstring, char **opt)
 		else
 			*opt = ft_strjoin_free(*opt, &argv[i][1], 1);
 		y = 0;
-		ft_putendl(*opt);
 	}
 	return (0);
+}
+
+int		ft_option_management(char const **arg, char *opt, char **flags)
+{
+	int	i;
+
+	i = 0;
+	if ((i = ft_takeopt((const char **)arg, "Ralrt", flags)) > 0)
+	{
+		if (flags)
+			ft_memdel((void **)flags);
+		printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n", \
+				arg[i / 10][i % 10]);
+	}
+	i = 0;
+	if (flags)
+	{
+		i = ft_binaryflags(opt);
+		ft_memdel((void **)flags);
+	}
+	return (i);
 }
