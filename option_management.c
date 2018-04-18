@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 01:09:43 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/18 04:29:54 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/18 05:35:14 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int		ft_option_management(char const **arg, char **flags)
 	int	i;
 
 	i = 0;
+	if (!arg[1])
+		return (0);
 	if ((i = ft_takeopt((const char **)arg, "Ralrt", flags)) > 0)
 	{
 		if (flags)

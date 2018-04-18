@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/18 04:26:19 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/18 06:43:20 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int				ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 t_list			*ft_lst_sort(t_list *b_list);
 t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,
 									t_lenmax *max);
-int				ft_recur_solve(char *path, DIR *dir);
+int				ft_recur_solve(char *path, DIR *dir, int flags);
 void			del(void *elem, size_t content_size);
 void			btdel(void *elem);
 void			ft_print_tree(t_btree *root, t_lenmax *max);

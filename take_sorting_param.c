@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 01:43:47 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/18 03:14:23 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/18 08:30:54 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ t_btree	*ft_sorting_param(char const **argv)
 		x++;
 	while (argv[x])
 	{
-		path = ft_strdup("./");
-		path = ft_strjoin_free(path, argv[x], 1);
+		path = ft_strdup(argv[x]);
 		stat(path, &stats);
 		len = ft_strlen(path) + 1;
 		if (S_ISDIR(stats.st_mode))

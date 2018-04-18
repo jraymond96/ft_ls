@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/18 04:29:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/18 08:32:02 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 int		ft_error(void)
 {
-	ft_putstr("error1\n");
+	ft_putstr("error DIR\n");
+	exit(0);
 	return (0);
 }
 
@@ -96,12 +97,15 @@ t_btree	*ft_take_infofile(char *path, DIR *dir, t_list **b_list, t_lenmax *max)
 		ft_bzero(&file_st, sizeof(t_finfo));
 		file_st.name = ft_strdup(fileinfo->d_name);
 		ft_z(&allstats, path, &file_st, max);
-		if (file_st.mode[0] == 'd' && file_st.name[0] != '.')
+		if (file_st.mode[0] == 'd')
 		{
 			elem = ft_lstnew(file_st.name, (ft_strlen(file_st.name) + 1));
 			ft_lstaddback(b_list, elem);
 		}
-		root = ft_btreeinser_ascii(root, &file_st, sizeof(t_finfo));
+		if (max->flags & MIN_T)
+			root = ft_btreeinser_int(root, &file_st, sizeof(t_finfo));
+		else
+			root = ft_btreeinser_ascii(root, &file_st, sizeof(t_finfo));
 	}
 	b_list = NULL;
 	return (root);
@@ -120,7 +124,7 @@ void	ft_free_all(t_list **list, t_btree **root, DIR *dir, char **path)
 	closedir(dir);
 }
 
-int		ft_recur_solve(char *path, DIR *dir)
+int		ft_recur_solve(char *path, DIR *dir, int flags)
 {
 	t_btree			*root;
 	t_list			*b_list;
@@ -130,8 +134,15 @@ int		ft_recur_solve(char *path, DIR *dir)
 
 	b_list = NULL;
 	ft_bzero(&lenmax, sizeof(t_lenmax));
+	lenmax.flags = flags;
 	root = ft_take_infofile(path, dir, &b_list, &lenmax);
 	b_list = ft_lst_sort(b_list);
+	elem = b_list;
+	while (elem)
+	{
+		printf("dir %s\n", elem->content);
+		elem = elem->next;
+	}
 	elem = b_list;
 	all_path = ft_strjoin(path, "/");
 	ft_print_tree(root, &lenmax);
@@ -140,13 +151,28 @@ int		ft_recur_solve(char *path, DIR *dir)
 	{
 		path = all_path;
 		all_path = ft_strjoin(all_path, elem->content);
-		ft_recur_solve(all_path, opendir(all_path));
+		ft_recur_solve(all_path, opendir(all_path), flags);
 		ft_memdel((void **)&all_path);
 		all_path = path;
 		elem = elem->next;
 	}*/
 	ft_free_all(&b_list, &root, dir, &all_path);
 	return (0);
+}
+
+void	ft_call_allfile(t_btree *root, int flags)
+{
+	DIR *dir;
+
+	if (root->left)
+		ft_call_allfile(root->left, flags);
+	ft_putendl(root->ptrdata);
+	if (!(dir = opendir((const char *)root->ptrdata)))
+		ft_error();
+	ft_recur_solve(root->ptrdata, dir, flags);
+	if (root->right)
+		ft_call_allfile(root->right, flags);
+
 }
 
 int		main(int argc, char **argv)
@@ -164,16 +190,13 @@ int		main(int argc, char **argv)
 	if (!param)
 	{
 		if (!(dir = opendir("./")))
-			return (ft_error());
+			ft_error();
 		path = ft_strdup(".");
+		ft_recur_solve(path, dir, flags);
+		ft_memdel((void **)&path);
 	}
 	else
-	{
-		if (!(dir = opendir(argv[1])))
-			return (ft_error());
-		path = ft_strdup(argv[1]);
-	}
-	ft_recur_solve(path, dir);
-	ft_memdel((void **)&path);
+		ft_call_allfile(param, flags);
 	return (0);
 }
+
