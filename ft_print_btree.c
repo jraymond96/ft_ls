@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/17 05:08:12 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/18 04:27:00 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 void	ft_print_tree(t_btree *root, t_lenmax *max)
 {
 	t_btree	*elem;
-//	int		padd;
+	int		padd;
 
 	elem = root;
 	if (elem->left)
 		ft_print_tree((t_btree *)elem->left, max);
-	ft_putendl(elem->ptrdata);
-	/*if (((t_finfo *)elem->ptrdata)->name[0] != '.')
+	if (((t_finfo *)elem->ptrdata)->name[0] != '.')
 	{
 		padd = ft_ilen(((t_finfo *)root->ptrdata)->n_link);
 		padd = max->lenmax_link - padd + 12;
@@ -39,7 +38,7 @@ void	ft_print_tree(t_btree *root, t_lenmax *max)
 		else
 			printf("%s\n", ((t_finfo *)root->ptrdata)->name);
 	//	ft_putendl(((t_finfo *)root->ptrdata)->name);
-	}*/
+	}
 	if (elem->right)
 		ft_print_tree((t_btree *)elem->right, max);
 }

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/17 06:16:21 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/18 04:29:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,22 +151,17 @@ int		ft_recur_solve(char *path, DIR *dir)
 
 int		main(int argc, char **argv)
 {
-//	DIR				*dir;
-//	char			*path;
-	t_lenmax		titi;
+	DIR				*dir;
+	char			*path;
 	char			*opt;
 	int				flags;
 	t_btree			*param;
 
 	(void)argc;
 	opt = NULL;
-	flags = ft_option_management((const char **)argv, "Ralrt", &opt);
-	param = ft_sorting_param((char const **)argv);
-	ft_print_tree(param->left, &titi);
-	return (0);
-	/*dir = ft_takefile(&argv[i]);
-	return (0);
-	if (i == (argc - 1))
+	flags = ft_option_management((const char **)argv, &opt);
+	param = ft_sorting_param((char const **)argv); /*param a free*/
+	if (!param)
 	{
 		if (!(dir = opendir("./")))
 			return (ft_error());
@@ -174,11 +169,11 @@ int		main(int argc, char **argv)
 	}
 	else
 	{
-		if (!(dir = opendir(argv[i])))
+		if (!(dir = opendir(argv[1])))
 			return (ft_error());
-		path = ft_strdup(argv[i]);
+		path = ft_strdup(argv[1]);
 	}
 	ft_recur_solve(path, dir);
 	ft_memdel((void **)&path);
-	return (0);*/
+	return (0);
 }
