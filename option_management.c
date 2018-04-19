@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 01:09:43 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/18 05:35:14 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/19 03:40:08 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ int		ft_takeopt(char const **argv, const char *optstring, char **opt)
 
 	i = 0;
 	y = 0;
-	while (argv[++i])
+	while (argv[++i] && argv[i][y++] == '-')
 	{
-		if (argv[i][y++] != '-')
-			return (-i);
 		while (argv[i][y])
 		{
 			if (!(ft_strchr(optstring, argv[i][y])))
@@ -82,7 +80,9 @@ int		ft_option_management(char const **arg, char **flags)
 		printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n", \
 				arg[i / 10][i % 10]);
 	}
-	if (flags && i == 0)
+	if (i != 0)
+		return (0);
+	if (*flags && i == 0)
 	{
 		i = 0;
 		i = ft_binaryflags(*flags);

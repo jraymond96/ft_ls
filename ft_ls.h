@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/18 06:43:20 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/19 07:04:31 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,7 @@ int				ft_erroropt(int i, char const ** argv);
 int				ft_binaryflags(char *flags);
 int				ft_option_management(char const **arg, char **flags);
 t_btree			*ft_sorting_param(char const ** argv);
+int				ft_strofpoint(char *str);
+void			ft_call_file(t_btree *root, int flags);
 
 # endif
