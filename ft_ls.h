@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/19 07:04:31 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/21 10:40:16 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef	struct			s_info_padding
 	int					lenmax_g;
 	int					lenmax_oct;
 	int					lenmax_link;
+	long long int		total_size;
 	int					flags;
 }						t_lenmax;
 
@@ -72,7 +73,7 @@ void			ft_file_size(struct stat *allstats, t_finfo *file_s,
 void			ft_file_time(struct stat *allstats, t_finfo *file_st);
 void			ft_find_uid_gid(struct stat *allstats, t_finfo *file_st,
 									t_lenmax *max);
-int				ft_z(struct stat *allstats, char *path, t_finfo *file_st,
+long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 						t_lenmax *max);
 t_list			*ft_lst_sort(t_list *b_list);
 t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 06:30:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/19 07:13:15 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/21 12:01:55 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_call_file(t_btree *root, int flags)
 		ft_printinfo(&file_st, &max);
 	else
 		ft_putendl(file_st.name);
-	if (root->right)
+	if (root->right && !(flags & MIN_R))
 		ft_call_file(root->right, flags);
 	else if (root->left && flags & MIN_R)
 		ft_call_file(root->left, flags);

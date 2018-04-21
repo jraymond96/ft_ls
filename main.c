@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/19 07:04:19 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/21 11:59:33 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 #include "ft_ls.h"
 #include <time.h>
 #include <locale.h>
+#include <errno.h>
 
 int		ft_error(void)
 {
-	ft_putstr("error DIR\n");
+	ft_putendl("ERROR DIR");
 	exit(0);
 	return (0);
 }
 
-int		ft_z(struct stat *allstats, char *path, t_finfo *file_st, t_lenmax *max)
+long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st, t_lenmax *max)
 {
 	char	*all_path;
 	int		len;
@@ -39,7 +40,7 @@ int		ft_z(struct stat *allstats, char *path, t_finfo *file_st, t_lenmax *max)
 	ft_file_size(allstats, file_st, max);
 	ft_find_uid_gid(allstats, file_st, max);
 	ft_memdel((void **)&all_path);
-	return (0);
+	return (allstats->st_blocks);
 }
 
 t_list	*ft_lst_sort(t_list *b_list)
@@ -96,7 +97,7 @@ t_btree	*ft_take_infofile(char *path, DIR *dir, t_list **b_list, t_lenmax *max)
 	{
 		ft_bzero(&file_st, sizeof(t_finfo));
 		file_st.name = ft_strdup(fileinfo->d_name);
-		ft_z(&allstats, path, &file_st, max);
+		max->total_size += ft_z(&allstats, path, &file_st, max);
 		if (file_st.mode[0] == 'd' && ft_strofpoint(file_st.name) == -1)
 		{
 			if (max->flags & MIN_A || file_st.name[0] != '.')
@@ -146,11 +147,14 @@ int		ft_recur_solve(char *path, DIR *dir, int flags)
 	if (ft_strofpoint(path) == -1)
 		printf("%s :\n", path);
 	all_path = ft_strjoin(path, "/");
+	if (lenmax.total_size && flags & MIN_L)
+		printf("total %lld\n", lenmax.total_size);
 	ft_print_tree(root, &lenmax);
 	if (flags & MAX_R)
 	{	
 		while (elem)
 		{
+			ft_putendl("");
 			path = all_path;
 			all_path = ft_strjoin(all_path, elem->content);
 			ft_recur_solve(all_path, opendir(all_path), flags);
@@ -205,9 +209,13 @@ int		main(int argc, char **argv)
 	}
 	else
 	{
-		ft_call_file(param->left, flags);
-		ft_call_allfile(param->right, flags, ft_btreeend(param, 1));
+		if (param->left)
+		{
+			ft_call_file(param->left, flags);
+			ft_putchar('\n');
+		}
+		if (param->right)
+			ft_call_allfile(param->right, flags, ft_btreeend(param, 1));
 	}
 	return (0);
 }
-
