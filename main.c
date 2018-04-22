@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/21 11:59:33 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/22 08:15:33 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st, t_lenmax
 	all_path = ft_strjoin(path, "/");
 	all_path = ft_strjoin_free(all_path, file_st->name, 1);
 	file_st->link = ft_handle_link(all_path);
-	lstat(all_path, allstats);
+	lstat(all_path, allstats);/*perror ?*/
 	if ((len = ft_ilen(allstats->st_nlink)) > max->lenmax_link)
 		max->lenmax_link = len;
 	file_st->n_link = allstats->st_nlink;
@@ -175,7 +175,7 @@ void	ft_call_allfile(t_btree *root, int flags, t_btree *end)
 		ft_call_allfile(root->left, flags, end);
 	else if (root->right && flags & MIN_R)
 		ft_call_allfile(root->right, flags, end);
-	if (!(dir = opendir((const char *)root->ptrdata)))
+	if (!(dir = opendir((const char *)root->ptrdata)))/*perror ?*/
 		ft_error();
 	ft_recur_solve(root->ptrdata, dir, flags);
 	if (root != end)
@@ -185,6 +185,15 @@ void	ft_call_allfile(t_btree *root, int flags, t_btree *end)
 	else if (root->left && flags & MIN_R)
 		ft_call_allfile(root->left, flags, end);
 
+}
+
+void	ft_free(t_btree **root, char **str)
+{
+	void *ptr;
+
+	ptr = btdelbis;
+	ft_btreedel(root, ptr);
+	ft_memdel((void **)str);
 }
 
 int		main(int argc, char **argv)
@@ -197,7 +206,7 @@ int		main(int argc, char **argv)
 
 	(void)argc;
 	opt = NULL;
-	flags = ft_option_management((const char **)argv, &opt); /* free opt il sert a rien*/
+	flags = ft_option_management((const char **)argv, &opt);
 	param = ft_sorting_param((char const **)argv); /*param a free*/
 	if (!param)
 	{
@@ -217,5 +226,6 @@ int		main(int argc, char **argv)
 		if (param->right)
 			ft_call_allfile(param->right, flags, ft_btreeend(param, 1));
 	}
+	ft_free(&param, &opt);
 	return (0);
 }

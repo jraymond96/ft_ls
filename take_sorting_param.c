@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 01:43:47 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/21 07:50:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/22 07:33:16 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,19 @@ t_btree	*ft_sorting_param(char const **argv)
 	while (argv[x])
 	{
 		path = ft_strdup(argv[x]);
-		stat(path, &stats);
-		len = ft_strlen(path) + 1;
-		if (S_ISDIR(stats.st_mode))
-			root = ft_btree_start(root, path, len, 1);
+		if (stat(path, &stats) == -1)
+		{
+			path = ft_strjoin_free("ls: ", path, 2);
+			perror(path);
+		}
 		else
-			root = ft_btree_start(root, path, len, 0);
+		{
+			len = ft_strlen(path) + 1;
+			if (S_ISDIR(stats.st_mode))
+				root = ft_btree_start(root, path, len, 1);
+			else
+				root = ft_btree_start(root, path, len, 0);
+		}
 		ft_memdel((void **)&path);
 		x++;
 	}

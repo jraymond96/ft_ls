@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 06:30:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/21 12:01:55 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/22 08:14:41 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ void	ft_printinfo(t_finfo *info, t_lenmax *max)
 		else
 			printf("%s\n", info->name);
 	}
+}
+
+void	frefre(t_finfo *elem)
+{
+	ft_memdel((void **)&elem->link);
+	ft_memdel((void **)&elem->n_id_user);
+	ft_memdel((void **)&elem->n_id_group);
 }
 
 void	ft_call_file(t_btree *root, int flags)
@@ -62,6 +69,7 @@ void	ft_call_file(t_btree *root, int flags)
 		ft_printinfo(&file_st, &max);
 	else
 		ft_putendl(file_st.name);
+	frefre(&file_st);
 	if (root->right && !(flags & MIN_R))
 		ft_call_file(root->right, flags);
 	else if (root->left && flags & MIN_R)

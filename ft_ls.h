@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/21 10:40:16 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/22 07:57:50 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,
 int				ft_recur_solve(char *path, DIR *dir, int flags);
 void			del(void *elem, size_t content_size);
 void			btdel(void *elem);
+void			btdelbis(void *elem);
 void			ft_print_tree(t_btree *root, t_lenmax *max);
 char			*ft_handle_link(char *path);
 int				ft_takeopt(char const **argv, const char *optstring,
