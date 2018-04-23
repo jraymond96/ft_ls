@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 01:09:43 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/19 03:40:08 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/23 11:31:20 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_takeopt(char const **argv, const char *optstring, char **opt)
 
 	i = 0;
 	y = 0;
-	while (argv[++i] && argv[i][y++] == '-')
+	while (argv[++i] && (argv[i][y++] == '-' && argv[i][y] != '-'))
 	{
 		while (argv[i][y])
 		{

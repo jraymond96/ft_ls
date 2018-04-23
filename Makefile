@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/04/19 07:02:46 by jraymond         ###   ########.fr        #
+#    Updated: 2018/04/23 12:20:13 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS = handle_mode.c \
 	   option_management.c \
 	   take_sorting_param.c \
 	   ft_strofpoint.c \
-	   call_allparam.c
+	   call_allparam.c \
+	   use_stat.c
 
 #COLORS
 
@@ -40,7 +41,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 		@make -C ./lib
-		@$(CC) $(FLAGS) ./lib/libft.a $(OBJS) -o $(NAME)
+		@$(CC) $(FLAGS) ./lib/libft.a libftprintf.a $(OBJS) -o $(NAME)
 		@echo "$(_GREEN)$(NAME) created$(_END)"
 
 %.o : %.c

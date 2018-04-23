@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 06:30:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/22 08:14:41 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/23 15:49:39 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,29 @@ void	frefre(t_finfo *elem)
 	ft_memdel((void **)&elem->n_id_group);
 }
 
+int		ft_empty_f_info(t_finfo *file_st, t_btree *root, t_lenmax *max)
+{
+	struct stat	allstats;
+	int			len;
+
+	if ((ft_call_stat(&allstats, max->flags, root->ptrdata)) == -1)
+		return (-1);
+	file_st->name = root->ptrdata;
+	file_st->link = ft_handle_link(root->ptrdata);
+	if ((len = ft_ilen(allstats.st_nlink)) > max->lenmax_link)
+		max->lenmax_link = len;
+	file_st->n_link = allstats.st_nlink;
+	ft_file_time(&allstats, file_st);
+	ft_handle_mode(&allstats, file_st);
+	ft_file_size(&allstats, file_st, max);
+	ft_find_uid_gid(&allstats, file_st, max);
+	return (0);
+}
+
 void	ft_call_file(t_btree *root, int flags)
 {
 	t_lenmax	max;
-	struct stat	allstats;
 	t_finfo		file_st;
-	int			len;
 
 	ft_bzero(&max, sizeof(t_lenmax));
 	ft_bzero(&file_st, sizeof(t_finfo));
@@ -55,21 +72,14 @@ void	ft_call_file(t_btree *root, int flags)
 		ft_call_file(root->left, flags);
 	else if (root->right && flags & MIN_R)
 		ft_call_file(root->right, flags);
-	file_st.link = ft_handle_link(root->ptrdata);
-	file_st.name = root->ptrdata;
-	lstat(file_st.name, &allstats);
-	if ((len = ft_ilen(allstats.st_nlink)) > max.lenmax_link)
-		max.lenmax_link = len;
-	file_st.n_link = allstats.st_nlink;
-	ft_file_time(&allstats, &file_st);
-	ft_handle_mode(&allstats, &file_st);
-	ft_file_size(&allstats, &file_st, &max);
-	ft_find_uid_gid(&allstats, &file_st, &max);
-	if (MIN_L & flags)
-		ft_printinfo(&file_st, &max);
-	else
-		ft_putendl(file_st.name);
-	frefre(&file_st);
+	if (ft_empty_f_info(&file_st, root, &max) == 0)
+	{
+		if (MIN_L & flags)
+			ft_printinfo(&file_st, &max);
+		else
+			ft_putendl(file_st.name);
+		frefre(&file_st);
+	}
 	if (root->right && !(flags & MIN_R))
 		ft_call_file(root->right, flags);
 	else if (root->left && flags & MIN_R)

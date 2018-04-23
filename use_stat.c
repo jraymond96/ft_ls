@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strofpoint.c                                    :+:      :+:    :+:   */
+/*   use_stat.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 05:11:39 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/23 16:16:10 by jraymond         ###   ########.fr       */
+/*   Created: 2018/04/23 12:02:11 by jraymond          #+#    #+#             */
+/*   Updated: 2018/04/23 15:29:05 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_how_arg(char **argv)
+int		ft_call_stat(struct stat *allstats, int flags, char *path)
 {
-	int	x;
+	char	*str;
 
-	x = 0;
-	while (argv[x][0] == '-' && argv[x])
-		x++;
-	if (argv[++x])
-		return (1);
+	(void)flags;
+	if ((lstat(path, allstats) == -1))
+	{
+		str = ft_strjoin("ls: ", path);
+		perror(str);
+	}
 	else
 		return (0);
-}
-
-int		ft_strofpoint(char *str)
-{
-	while (*str)
-	{
-		if (*str != '.')
-			return (-1);
-		str++;
-	}
-	return (0);
+	ft_memdel((void **)&str);
+	return (-1);
 }
