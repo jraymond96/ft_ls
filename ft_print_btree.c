@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 11:48:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/25 16:54:22 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_print_treel(t_btree *root, t_lenmax *max)
 
 	elem = root;
 	if (elem->left)
-		ft_print_tree((t_btree *)elem->left, max);
+		ft_print_treel((t_btree *)elem->left, max);
 	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
 	{
 		padd = ft_ilen(((t_finfo *)root->ptrdata)->n_link);
@@ -39,7 +39,7 @@ void	ft_print_treel(t_btree *root, t_lenmax *max)
 			printf("%s\n", ((t_finfo *)root->ptrdata)->name);
 	}
 	if (elem->right)
-		ft_print_tree((t_btree *)elem->right, max);
+		ft_print_treel((t_btree *)elem->right, max);
 }
 
 void	ft_print_treerl(t_btree *root, t_lenmax *max)
@@ -49,7 +49,7 @@ void	ft_print_treerl(t_btree *root, t_lenmax *max)
 
 	elem = root;
 	if (elem->right)
-		ft_print_tree((t_btree *)elem->right, max);
+		ft_print_treerl((t_btree *)elem->right, max);
 	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
 	{
 		padd = ft_ilen(((t_finfo *)root->ptrdata)->n_link);
@@ -68,7 +68,7 @@ void	ft_print_treerl(t_btree *root, t_lenmax *max)
 			printf("%s\n", ((t_finfo *)root->ptrdata)->name);
 	}
 	if (elem->left)
-		ft_print_tree((t_btree *)elem->left, max);
+		ft_print_treerl((t_btree *)elem->left, max);
 }
 
 void	ft_print_treen(t_btree *root, t_lenmax *max)
@@ -77,11 +77,11 @@ void	ft_print_treen(t_btree *root, t_lenmax *max)
 
 	elem = root;
 	if (elem->left)
-		ft_print_tree((t_btree *)elem->left, max);
+		ft_print_treen((t_btree *)elem->left, max);
 	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
 		ft_putendl(((t_finfo *)root->ptrdata)->name);
 	if (elem->right)
-		ft_print_tree((t_btree *)elem->right, max);
+		ft_print_treen((t_btree *)elem->right, max);
 }
 
 void	ft_print_treern(t_btree *root, t_lenmax *max)
@@ -90,18 +90,22 @@ void	ft_print_treern(t_btree *root, t_lenmax *max)
 
 	elem = root;
 	if (elem->right)
-		ft_print_tree((t_btree *)elem->right, max);
+		ft_print_treern((t_btree *)elem->right, max);
 	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
 		ft_putendl(((t_finfo *)root->ptrdata)->name);
 	if (elem->left)
-		ft_print_tree((t_btree *)elem->left, max);
+		ft_print_treern((t_btree *)elem->left, max);
 }
 
-void	ft_print_tree(t_btree *root, t_lenmax *max)
+void	ft_print_tree(t_btree *root, t_lenmax *max, int nb_arg)
 {
 	int	res;
 
-	res = 
+	res = 0;
+	if (nb_arg > 1)
+		printf("%s :\n", max->path);
+	if (max->flags & MIN_L && (max->total_size || max->flags & MIN_A))
+		printf("total %lld\n", max->total_size);
 	if (MIN_L & max->flags)
 	{
 		if (MIN_R & max->flags)

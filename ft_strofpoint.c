@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 05:11:39 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 11:48:00 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:57:20 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 int		ft_how_arg(char **argv)
 {
 	int	x;
+	int	res;
 
 	x = 1;
+	res = 0;
 	while (argv[x] && argv[x][0] == '-')
 		x++;
-	if (argv[x])
-		return (1);
-	else
-		return (0);
+	while (argv[x++])
+		res++;
+	return (res);
 }
 
 int		ft_strofpoint(char *str)

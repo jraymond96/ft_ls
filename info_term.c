@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 09:06:09 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 10:28:22 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:53:45 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ int	ft_getinf_term(t_lenmax *max)
 	if ((ioctl(0, TIOCGWINSZ, &argp)) == -1)
 		perror("ioctl error ");
 	else
-	{
 		max->nb_col = argp.ws_col;
-		max->nb_row = argp.ws_row;
-	}
 	return (0);
 }

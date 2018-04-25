@@ -6,12 +6,13 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:50:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/04 13:36:49 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/25 17:02:03 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "lib/libft.h"
+#include "sys/types.h"
 
 void	ft_file_size(struct stat *allstats, t_finfo *file_st, t_lenmax *max)
 {
@@ -31,11 +32,11 @@ char	ft_file_type(struct stat *allstats)
 	else if (S_ISLNK(allstats->st_mode))
 		return ('l');
 	else if (S_ISCHR(allstats->st_mode))
-		return ('B');
-	else if (S_ISBLK(allstats->st_mode))
 		return ('c');
+	else if (S_ISBLK(allstats->st_mode))
+		return ('b');
 	else if (S_ISFIFO(allstats->st_mode))
-		return ('P');
+		return ('p');
 	else
 		return ('S');
 }
@@ -53,5 +54,10 @@ void	ft_handle_mode(struct stat *allstats, t_finfo *file_s)
 	while (--i != -1)
 	{
 		file_s->mode[x++] = allstats->st_mode & (1 << i) ? res[(x - 1)] : '-';
+	}
+	if (file_s->mode[0] == 'b' || file_s->mode[0] == 'c')
+	{	
+		file_s->major = major(allstats->st_rdev);
+		file_s->minor = minor(allstats->st_rdev);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 11:45:28 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/25 16:46:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct			s_fileinfo
 	char				type;
 	char				timeday[13];
 	int					n_link;
+	int					minor;
+	int					major;
 	time_t				time_u; /*flags u (st_atime)*/
 	time_t				time_n;
 	time_t				time_c; /*flags c (st_ctime)*/
@@ -50,8 +52,8 @@ typedef	struct			s_info_padding
 	int					lenmax_oct;
 	int					lenmax_link;
 	int					lenmax_name;
+	char				*path;
 	long long int		total_size;
-	unsigned short		nb_row;
 	unsigned short		nb_col;
 	int					flags;
 }						t_lenmax;
@@ -81,11 +83,11 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 t_list			*ft_lst_sort(t_list *b_list);
 t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,
 									t_lenmax *max);
-int				ft_recur_solve(char *path, DIR *dir, int flags);
+int				ft_recur_solve(char *path, DIR *dir, int flags, int nb_arg);
 void			del(void *elem, size_t content_size);
 void			btdel(void *elem);
 void			btdelbis(void *elem);
-void			ft_print_tree(t_btree *root, t_lenmax *max);
+void			ft_print_tree(t_btree *root, t_lenmax *max, int nb_arg);
 char			*ft_handle_link(char *path);
 int				ft_takeopt(char const **argv, const char *optstring,
 								char **opt);
