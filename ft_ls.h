@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/23 16:05:11 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/25 11:45:28 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ typedef	struct			s_info_padding
 	int					lenmax_g;
 	int					lenmax_oct;
 	int					lenmax_link;
+	int					lenmax_name;
 	long long int		total_size;
+	unsigned short		nb_row;
+	unsigned short		nb_col;
 	int					flags;
 }						t_lenmax;
 
@@ -94,5 +97,6 @@ int				ft_strofpoint(char *str);
 void			ft_call_file(t_btree *root, int flags);
 int				ft_call_stat(struct stat *allstats, int flags, char *path);
 int				ft_how_arg(char **argv);
+int				ft_getinf_term(t_lenmax *max);
 
 # endif

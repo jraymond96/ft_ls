@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/21 10:44:26 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/25 11:48:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ void	ft_print_treern(t_btree *root, t_lenmax *max)
 
 void	ft_print_tree(t_btree *root, t_lenmax *max)
 {
+	int	res;
+
+	res = 
 	if (MIN_L & max->flags)
 	{
 		if (MIN_R & max->flags)

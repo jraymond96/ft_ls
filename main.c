@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/23 16:55:00 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/04/25 11:47:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st, t_lenmax
 
 	all_path = ft_strjoin(path, "/");
 	all_path = ft_strjoin_free(all_path, file_st->name, 1);
+	if ((len = ft_strlen(file_st->name)) > max->lenmax_name)
+		max->lenmax_name = len;
 	file_st->link = ft_handle_link(all_path);
 	if ((ft_call_stat(allstats, max->flags, all_path)) == -1)
 		return(-1);
@@ -38,7 +40,6 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st, t_lenmax
 	file_st->n_link = allstats->st_nlink;
 	ft_file_time(allstats, file_st);
 	ft_handle_mode(allstats, file_st);
-	ft_putendl(file_st->name);
 	ft_file_size(allstats, file_st, max);
 	ft_find_uid_gid(allstats, file_st, max);
 	ft_memdel((void **)&all_path);
@@ -102,6 +103,7 @@ int		ft_recur_solve(char *path, DIR *dir, int flags)
 	b_list = NULL;
 	ft_bzero(&lenmax, sizeof(t_lenmax));
 	lenmax.flags = flags;
+	ft_getinf_term(&lenmax);
 	root = ft_take_infofile(path, dir, &b_list, &lenmax);
 	b_list = ft_lst_sort(b_list);
 	if (flags & MIN_R)
@@ -140,7 +142,6 @@ void	ft_call_allfile(t_btree *root, int flags, t_btree *end)
 		ft_call_allfile(root->right, flags, end);
 	if (!(dir = opendir((const char *)root->ptrdata)))/*perror ?*/
 		ft_error();
-	ft_putendl(root->ptrdata);
 	ft_recur_solve(root->ptrdata, dir, flags);
 	if (root != end)
 		ft_putchar('\n');
@@ -174,7 +175,7 @@ int		main(int argc, char **argv)
 	opt = NULL;
 	flags = ft_option_management((const char **)argv, &opt);
 	param = ft_sorting_param((char const **)argv, flags);
-	if (!param && !ft_how_arg(argv))
+	if (!param && ft_how_arg(argv) == 0)
 	{
 		if (!(dir = opendir("./")))
 			ft_error();

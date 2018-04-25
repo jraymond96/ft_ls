@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/04/23 12:20:13 by jraymond         ###   ########.fr        #
+#    Updated: 2018/04/25 09:17:47 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRCS = handle_mode.c \
 	   take_sorting_param.c \
 	   ft_strofpoint.c \
 	   call_allparam.c \
-	   use_stat.c
+	   use_stat.c \
+	   info_term.c
 
 #COLORS
 

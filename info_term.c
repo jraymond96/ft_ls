@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strofpoint.c                                    :+:      :+:    :+:   */
+/*   info_term.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 05:11:39 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 11:48:00 by jraymond         ###   ########.fr       */
+/*   Created: 2018/04/25 09:06:09 by jraymond          #+#    #+#             */
+/*   Updated: 2018/04/25 10:28:22 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-int		ft_how_arg(char **argv)
+int	ft_getinf_term(t_lenmax *max)
 {
-	int	x;
+	struct winsize argp;
 
-	x = 1;
-	while (argv[x] && argv[x][0] == '-')
-		x++;
-	if (argv[x])
-		return (1);
+	if ((ioctl(0, TIOCGWINSZ, &argp)) == -1)
+		perror("ioctl error ");
 	else
-		return (0);
-}
-
-int		ft_strofpoint(char *str)
-{
-	while (*str)
 	{
-		if (*str != '.')
-			return (-1);
-		str++;
+		max->nb_col = argp.ws_col;
+		max->nb_row = argp.ws_row;
 	}
 	return (0);
 }
