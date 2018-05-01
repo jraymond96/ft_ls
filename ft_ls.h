@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 16:46:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/01 14:37:24 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <pwd.h>
 # include "lib/libft.h"
 # include <stdio.h> /* A ENLEVER */
-
+# define PATH ((t_finfo *)root->ptrdata)
 /*
 **-----------------------------------STRUCTS------------------------------------
 */
@@ -47,11 +47,13 @@ typedef struct			s_fileinfo
 
 typedef	struct			s_info_padding
 {
-	int					lenmax_u;
-	int					lenmax_g;
-	int					lenmax_oct;
-	int					lenmax_link;
-	int					lenmax_name;
+	short				lenmax_u;
+	short				lenmax_g;
+	short				lenmax_oct;
+	short				lenmax_link;
+	short				lenmax_name;
+	short				lenmax_mino;
+	short				lenmax_majo;
 	char				*path;
 	long long int		total_size;
 	unsigned short		nb_col;

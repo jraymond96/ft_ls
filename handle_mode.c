@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:50:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 17:02:03 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/01 14:06:39 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,26 @@
 
 void	ft_file_size(struct stat *allstats, t_finfo *file_st, t_lenmax *max)
 {
-	int	len;
+	short	len;
+	short	len1;
+	short	res;
 
-	file_st->size = allstats->st_size;
-	if ((len = ft_ilen(file_st->size)) > max->lenmax_oct)
-		max->lenmax_oct = len;
+	if (file_st->size != -1)
+	{
+		file_st->size = allstats->st_size;
+		if ((len = ft_ilen(file_st->size)) > max->lenmax_oct)
+			max->lenmax_oct = len;
+	}
+	else
+	{
+		if ((len = ft_ilen(file_st->minor)) > max->lenmax_mino)
+			max->lenmax_mino = len; 
+		if ((len1 = ft_ilen(file_st->major)) > max->lenmax_majo)
+			max->lenmax_majo = len1;
+		res = len + len1 + 3;
+		if (res > max->lenmax_oct)
+			max->lenmax_oct = res;
+	}
 }
 
 char	ft_file_type(struct stat *allstats)
@@ -56,8 +71,9 @@ void	ft_handle_mode(struct stat *allstats, t_finfo *file_s)
 		file_s->mode[x++] = allstats->st_mode & (1 << i) ? res[(x - 1)] : '-';
 	}
 	if (file_s->mode[0] == 'b' || file_s->mode[0] == 'c')
-	{	
+	{
 		file_s->major = major(allstats->st_rdev);
 		file_s->minor = minor(allstats->st_rdev);
+		file_s->size = -1;
 	}
 }

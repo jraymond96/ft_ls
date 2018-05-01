@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 16:59:02 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:54:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <time.h>
 #include <locale.h>
 #include <errno.h>
+#include "./ft_printf/ft_printf.h"
 
 int		ft_error(void)
 {
@@ -111,12 +112,13 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, int nb_arg)
 		b_list = ft_lstrev(b_list);
 	elem = b_list;
 	all_path = ft_strjoin(path, "/");
+	if (flags & MIN_L || flags & MIN_R)
+		ft_printf("%s:\n", lenmax.path);
 	ft_print_tree(root, &lenmax, nb_arg);
 	if (flags & MAX_R)
 	{	
 		while (elem)
 		{
-			ft_putendl("");
 			path = all_path;
 			all_path = ft_strjoin(all_path, elem->content);
 			ft_recur_solve(all_path, opendir(all_path), flags, nb_arg);

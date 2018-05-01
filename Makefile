@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/04/25 09:17:47 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/01 16:36:10 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,9 @@ OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-		@make -C ./lib
-		@$(CC) $(FLAGS) ./lib/libft.a libftprintf.a $(OBJS) -o $(NAME)
+		@make -C lib
+		@make -C ft_printf
+		@$(CC) $(FLAGS) ./lib/libft.a ./ft_printf/libftprintf.a $(OBJS) -o $(NAME)
 		@echo "$(_GREEN)$(NAME) created$(_END)"
 
 %.o : %.c
@@ -50,11 +51,13 @@ $(NAME) : $(OBJS)
 
 clean :
 		@make clean -C ./lib
+		@make clean -C ./ft_printf
 		@rm -rf $(OBJS)
 		@echo "$(_RED)clean : $(_GREEN)Done$(_END)"
 
 fclean : clean
 		@make fclean -C ./lib
+		@make fclean -C ./ft_printf
 		@rm -rf $(NAME)
 		@echo "$(_RED)fclean : $(_GREEN)Done$(_END)"
 
