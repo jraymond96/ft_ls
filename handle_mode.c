@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:50:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/01 14:06:39 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:17:06 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,29 @@ char	ft_file_type(struct stat *allstats)
 	else if (S_ISFIFO(allstats->st_mode))
 		return ('p');
 	else
-		return ('S');
+		return ('s');
+}
+
+void	is_exe(struct stat *allst, char *mode)
+{
+	if (S_ISUID & allst->st_mode)
+	{
+		if (!(S_IXUSR & allst->st_mode))
+			mode[3] = 'S';
+		else
+			mode[3] = 's';
+		if (!(S_IXGRP & allst->st_mode))
+			mode[6] = 'S';
+		else
+			mode[6] = 's';
+	}
+	if (S_ISVTX & allst->st_mode)
+	{
+		if (!(S_IXOTH & allst->st_mode) || !(S_IROTH & allst->st_mode))
+			mode[9] = 'T';
+		else
+			mode[9] = 't';
+	}
 }
 
 void	ft_handle_mode(struct stat *allstats, t_finfo *file_s)
@@ -67,9 +89,8 @@ void	ft_handle_mode(struct stat *allstats, t_finfo *file_s)
 	ft_strcpy(res, "rwxrwxrwx");
 	file_s->mode[x++] = ft_file_type(allstats);
 	while (--i != -1)
-	{
 		file_s->mode[x++] = allstats->st_mode & (1 << i) ? res[(x - 1)] : '-';
-	}
+	is_exe(allstats, file_s->mode);
 	if (file_s->mode[0] == 'b' || file_s->mode[0] == 'c')
 	{
 		file_s->major = major(allstats->st_rdev);

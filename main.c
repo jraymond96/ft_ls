@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/01 17:54:13 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:07:07 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,12 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, int nb_arg)
 		b_list = ft_lstrev(b_list);
 	elem = b_list;
 	all_path = ft_strjoin(path, "/");
-	if (flags & MIN_L || flags & MIN_R)
-		ft_printf("%s:\n", lenmax.path);
 	ft_print_tree(root, &lenmax, nb_arg);
 	if (flags & MAX_R)
 	{	
 		while (elem)
 		{
+			ft_putchar('\n');
 			path = all_path;
 			all_path = ft_strjoin(all_path, elem->content);
 			ft_recur_solve(all_path, opendir(all_path), flags, nb_arg);
@@ -180,7 +179,7 @@ int		main(int argc, char **argv)
 		if (!(dir = opendir("./")))
 			ft_error();
 		path = ft_strdup(".");
-		ft_recur_solve(path, dir, flags, ft_how_arg(argv));
+		ft_recur_solve(path, dir, flags, 0);
 		ft_memdel((void **)&path);
 	}
 	else if (param)
@@ -192,7 +191,7 @@ int		main(int argc, char **argv)
 				ft_putchar('\n');
 		}
 		if (param->right)
-			ft_call_allfile(param->right, flags, ft_btreeend(param, 1), ft_how_arg(argv));
+			ft_call_allfile(param->right, flags, ft_btreeend(param, 1), ft_how_dir(param, -1));
 	}
 	ft_free(&param, &opt);
 	return (0);

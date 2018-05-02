@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/01 14:37:24 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:02:29 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,7 @@ void			ft_call_file(t_btree *root, int flags);
 int				ft_call_stat(struct stat *allstats, int flags, char *path);
 int				ft_how_arg(char **argv);
 int				ft_getinf_term(t_lenmax *max);
+int				ft_how_dir(t_btree *root, int i);
+int				is_empty(t_btree *root, int i);
 
 # endif
