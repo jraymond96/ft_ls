@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/02 20:31:49 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/04 19:11:52 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,20 @@
 #include <errno.h>
 #include "./ft_printf/ft_printf.h"
 
-int		ft_error(void)
+char	*tname_file(char *str)
 {
-	ft_putendl("ERROR DIR");
-	exit(0);
+	char	*tmp;
+	while ((str = ft_strchr(str, '/')))
+	{
+		str++;
+		tmp = str;
+	}
+	return(tmp);
+}
+
+int		ft_error(char *path)
+{
+	ft_printf("%s:\nls: %s: %s\n", path, tname_file(path), strerror(errno));
 	return (0);
 }
 
@@ -102,6 +112,8 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, int nb_arg)
 	char			*all_path;
 
 	b_list = NULL;
+	if (!dir)
+		return (ft_error(path));
 	ft_bzero(&lenmax, sizeof(t_lenmax));
 	lenmax.flags = flags;
 	ft_getinf_term(&lenmax);
@@ -138,8 +150,8 @@ void	ft_call_allfile(t_btree *root, int flags, t_btree *end, int nb_arg)
 		ft_call_allfile(root->left, flags, end, nb_arg);
 	else if (root->right && flags & MIN_R)
 		ft_call_allfile(root->right, flags, end, nb_arg);
-	if (!(dir = opendir((const char *)root->ptrdata)))/*perror ?*/
-		ft_error();
+	if (!(dir = opendir((const char *)root->ptrdata)))
+		ft_error(root->ptrdata);
 	ft_recur_solve(root->ptrdata, dir, flags, nb_arg);
 	if (root != end)
 		ft_putchar('\n');
@@ -177,7 +189,7 @@ int		main(int argc, char **argv)
 	if (!param && ft_how_arg(argv) == 0)
 	{
 		if (!(dir = opendir("./")))
-			ft_error();
+			ft_error("./");
 		path = ft_strdup(".");
 		ft_recur_solve(path, dir, flags, 0);
 		ft_memdel((void **)&path);

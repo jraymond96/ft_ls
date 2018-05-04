@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/02 18:02:25 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/04 19:35:20 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_print_treel(t_btree *root, t_lenmax *max)
 		}
 		else
 		{
-			ft_printf("%s  %*d %-*s  %-*s   %*d, %*d %s %s", \
+			ft_printf("%s  %*d %-*s  %-*s   %*d,%*d %s %s", \
 			PATH->mode, max->lenmax_link, PATH->n_link, max->lenmax_u, \
 			PATH->n_id_user, max->lenmax_g, PATH->n_id_group, \
 			max->lenmax_majo, PATH->major, max->lenmax_mino, PATH->minor, \
