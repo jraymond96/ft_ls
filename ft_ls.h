@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/02 18:02:29 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/05 20:26:39 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int				ft_how_arg(char **argv);
 int				ft_getinf_term(t_lenmax *max);
 int				ft_how_dir(t_btree *root, int i);
 int				is_empty(t_btree *root, int i);
+t_btree			*select_inser(t_btree *root, t_finfo *info, t_lenmax *max);
 
 # endif

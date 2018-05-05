@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/05 17:43:35 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/05 20:26:09 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ t_btree	*ft_take_infofile(char *path, DIR *dir, t_list **b_list, t_lenmax *max)
 					ft_lstaddback(b_list, elem);
 				}
 			}
-			if (max->flags & MIN_T)
-				root = ft_btreeinser_int(root, &file_st, sizeof(t_finfo));
-			else
-				root = ft_btreeinser_ascii(root, &file_st, sizeof(t_finfo));
+			root = select_inser(root, &file_st, max);
 		}
 	}
 	return (root);
