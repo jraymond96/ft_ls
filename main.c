@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/04 19:11:52 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/05 17:43:35 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ char	*tname_file(char *str)
 	return(tmp);
 }
 
-int		ft_error(char *path)
+int		ft_error(char *path, int nb_arg)
 {
-	ft_printf("%s:\nls: %s: %s\n", path, tname_file(path), strerror(errno));
+	if (nb_arg > 1)
+		ft_printf("%s:\nls: %s: %s\n", path, tname_file(path), strerror(errno));
+	else
+		ft_printf("ls: %s: %s\n", tname_file(path), strerror(errno));
 	return (0);
 }
 
@@ -113,9 +116,10 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, int nb_arg)
 
 	b_list = NULL;
 	if (!dir)
-		return (ft_error(path));
+		return (ft_error(path, 3));
 	ft_bzero(&lenmax, sizeof(t_lenmax));
 	lenmax.flags = flags;
+	lenmax.lenmax_mino = 3;
 	ft_getinf_term(&lenmax);
 	root = ft_take_infofile(path, dir, &b_list, &lenmax);
 	b_list = ft_lst_sort(b_list);
@@ -150,9 +154,11 @@ void	ft_call_allfile(t_btree *root, int flags, t_btree *end, int nb_arg)
 		ft_call_allfile(root->left, flags, end, nb_arg);
 	else if (root->right && flags & MIN_R)
 		ft_call_allfile(root->right, flags, end, nb_arg);
-	if (!(dir = opendir((const char *)root->ptrdata)))
-		ft_error(root->ptrdata);
-	ft_recur_solve(root->ptrdata, dir, flags, nb_arg);
+	dir = opendir((const char *)root->ptrdata);
+	if (!dir)
+		ft_error(root->ptrdata, nb_arg);
+	else
+		ft_recur_solve(root->ptrdata, dir, flags, nb_arg);
 	if (root != end)
 		ft_putchar('\n');
 	if (root->right)
@@ -189,7 +195,7 @@ int		main(int argc, char **argv)
 	if (!param && ft_how_arg(argv) == 0)
 	{
 		if (!(dir = opendir("./")))
-			ft_error("./");
+			ft_error("./", 0);
 		path = ft_strdup(".");
 		ft_recur_solve(path, dir, flags, 0);
 		ft_memdel((void **)&path);

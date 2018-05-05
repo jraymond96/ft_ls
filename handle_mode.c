@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:50:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/04 19:48:04 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/05 15:25:43 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ void	ft_file_size(struct stat *allstats, t_finfo *file_st, t_lenmax *max)
 		file_st->size = allstats->st_size;
 		if ((len = ft_ilen(file_st->size)) > max->lenmax_oct)
 			max->lenmax_oct = len;
-		if (len > max->lenmax_mino)
-			max->lenmax->mino;
 	}
 	else
 	{
 		if ((len = ft_ilen(file_st->minor)) > max->lenmax_mino)
-			max->lenmax_mino = len + 1; 
+			max->lenmax_mino = len; 
 		if ((len1 = ft_ilen(file_st->major)) > max->lenmax_majo)
-			max->lenmax_majo = len1 + 1;
-		res = len + len1 + 5;
+			max->lenmax_majo = len1;
+		res = max->lenmax_mino + max->lenmax_majo + 2;
 		if (res > max->lenmax_oct)
 			max->lenmax_oct = res;
 	}

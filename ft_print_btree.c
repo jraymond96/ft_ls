@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/04 19:35:20 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/05 17:45:02 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_print_treel(t_btree *root, t_lenmax *max)
 		}
 		else
 		{
-			ft_printf("%s  %*d %-*s  %-*s   %*d,%*d %s %s", \
+			ft_printf("%s  %*d %-*s  %-*s   %*d, %*d %s %s", \
 			PATH->mode, max->lenmax_link, PATH->n_link, max->lenmax_u, \
 			PATH->n_id_user, max->lenmax_g, PATH->n_id_group, \
 			max->lenmax_majo, PATH->major, max->lenmax_mino, PATH->minor, \
@@ -73,6 +73,8 @@ void	ft_print_treerl(t_btree *root, t_lenmax *max)
 		}
 		if (((t_finfo *)root->ptrdata)->link)
 			ft_printf(" -> %s\n", ((t_finfo *)root->ptrdata)->link);
+		else
+			ft_putchar('\n');
 	}
 	if (elem->left)
 		ft_print_treerl((t_btree *)elem->left, max);
@@ -110,13 +112,8 @@ void	ft_print_tree(t_btree *root, t_lenmax *max, int nb_arg)
 
 	if (nb_arg > 1 || (MAX_R & max->flags && ft_strlen(max->path) > 1))
 		ft_printf("%s:\n", max->path);
-	res = is_empty(root, -1);
-	if (!(max->flags & MIN_A) && res == 0)
-	{
-		ft_putendl("");
-		return;
-	}
-	if (max->flags & MIN_L && (max->total_size || max->flags & MIN_A))
+	res = is_empty(root, 0);
+	if (max->flags & MIN_L && (max->total_size || max->flags & MIN_A || res))
 		printf("total %lld\n", max->total_size);
 	if (MIN_L & max->flags)
 	{

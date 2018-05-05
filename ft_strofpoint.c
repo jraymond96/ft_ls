@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 05:11:39 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/02 17:42:40 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/05 16:04:08 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,12 @@ int		ft_how_dir(t_btree *root, int i)
 
 int		is_empty(t_btree *root, int i)
 {
+	if (((t_finfo *)root->ptrdata)->name[0] != '.')
+		i++;
 	if (root->left)
-	{
-		if (((t_finfo *)root->ptrdata)->name[0] != '.')
-			i++;
-		i = ft_how_dir(root->left, i);
-	}
+		i = is_empty(root->left, i);
 	if (root->right)
-	{
-		if (((t_finfo *)root->ptrdata)->name[0] != '.')
-			i++;
-		i = ft_how_dir(root->right, i);
-	}
+		i = is_empty(root->right, i);
 	return (i);
 }
 
