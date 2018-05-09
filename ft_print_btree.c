@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/05 19:06:42 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 03:09:10 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,19 @@ void	ft_print_treern(t_btree *root, t_lenmax *max)
 		ft_print_treern((t_btree *)elem->left, max);
 }
 
-void	ft_print_tree(t_btree *root, t_lenmax *max, int nb_arg)
+void	ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec)
 {
 	int	res;
 
-	if (nb_arg > 1 || (MAX_R & max->flags && ft_strlen(max->path) > 1))
+	if (rec->nb_arg > 1)
 		ft_printf("%s:\n", max->path);
+	else
+	{
+		if (max->flags & MAX_R && rec->a & (1<<0))
+			ft_printf("%s:\n", max->path);
+	}
+	if (max->flags & MAX_R)
+		rec->a |= (1<<0);
 	res = is_empty(root, 0);
 	if (max->flags & MIN_L && (max->total_size || max->flags & MIN_A || res))
 		printf("total %lld\n", max->total_size);

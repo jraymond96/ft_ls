@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/05 20:26:39 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 04:54:10 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FT_LS_H
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <locale.h>
+# include <errno.h>
 # include <time.h>
 # include <stdlib.h>
 # include <dirent.h>
@@ -21,6 +23,7 @@
 # include <grp.h>
 # include <pwd.h>
 # include "lib/libft.h"
+# include "./ft_printf/ft_printf.h"
 # include <stdio.h> /* A ENLEVER */
 # define PATH ((t_finfo *)root->ptrdata)
 /*
@@ -60,6 +63,12 @@ typedef	struct			s_info_padding
 	int					flags;
 }						t_lenmax;
 
+typedef struct			s_info_recur
+{
+	int					nb_arg;
+	unsigned int		a : 1;
+}						t_recur;
+
 /*
 **-------------------------------------MASK-------------------------------------
 */
@@ -85,11 +94,11 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 t_list			*ft_lst_sort(t_list *b_list);
 t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,
 									t_lenmax *max);
-int				ft_recur_solve(char *path, DIR *dir, int flags, int nb_arg);
+int				ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec);
 void			del(void *elem, size_t content_size);
 void			btdel(void *elem);
 void			btdelbis(void *elem);
-void			ft_print_tree(t_btree *root, t_lenmax *max, int nb_arg);
+void			ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec);
 char			*ft_handle_link(char *path);
 int				ft_takeopt(char const **argv, const char *optstring,
 								char **opt);
@@ -105,5 +114,10 @@ int				ft_getinf_term(t_lenmax *max);
 int				ft_how_dir(t_btree *root, int i);
 int				is_empty(t_btree *root, int i);
 t_btree			*select_inser(t_btree *root, t_finfo *info, t_lenmax *max);
+
+void			ft_free_all(t_list **list, t_btree **root, DIR *dir,
+								char **path);
+int				ft_error(char *path, int nb_arg);
+char			*tname_file(char *str);
 
 # endif

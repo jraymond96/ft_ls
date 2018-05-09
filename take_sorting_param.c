@@ -6,11 +6,28 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 01:43:47 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/23 15:50:08 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 05:01:20 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+int		skip_flags(char const **argv)
+{
+	int	x;
+
+	x = 1;
+	while (argv[x] && argv[x][0] == '-')
+	{
+		if (argv[x][1] == '-')
+		{
+			x++;
+			break ;
+		}
+		x++;
+	}
+	return (x);
+}
 
 t_btree	*ft_sorting_param(char const **argv, int flags)
 {
@@ -18,19 +35,10 @@ t_btree	*ft_sorting_param(char const **argv, int flags)
 	t_btree			*root;
 	int				x;
 	int				len;
-	char 			*path;
+	char			*path;
 
-	x = 1;
+	x = skip_flags(argv);
 	root = NULL;
-	while (argv[x] && argv[x][0] == '-')
-	{
-		if (argv[x][1] == '-')
-		{
-			x++;
-			break;
-		}
-		x++;
-	}
 	while (argv[x])
 	{
 		path = ft_strdup(argv[x]);

@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstrev.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 08:32:57 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/18 08:43:43 by jraymond         ###   ########.fr       */
+/*   Created: 2018/05/09 04:49:42 by jraymond          #+#    #+#             */
+/*   Updated: 2018/05/09 04:57:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 
-t_list	ft_lstrev(t_list *begin_list, t_list *new_lst)
+int		ft_error(char *path, int nb_arg)
 {
-	t_list	*elem;
-
-	elem = begin_list;
-	if (elem->next)
-		ft_lstrev(elem->next);
-	while (new_lst->next)
-		new_lst = new_lst->next;
-	new_lst->next = ft_memmove(new_lst->next, elem, sizeof(t_list))
+	if (nb_arg > 1)
+		ft_dprintf(2, "%s:\nls: %s: %s\n", path, tname_file(path),
+					strerror(errno));
+	else
+		ft_dprintf(2, "ls: %s: %s\n", tname_file(path), strerror(errno));
+	return (0);
 }

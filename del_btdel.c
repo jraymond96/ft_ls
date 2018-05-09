@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 15:44:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/05 20:26:54 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 04:55:52 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,3 @@ void	btdel(void *elem)
 	ft_memdel((void **)&((t_finfo *)elem)->n_id_group);
 	ft_memdel(&elem);
 }
-
-

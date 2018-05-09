@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 05:11:39 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/05 16:04:08 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 05:00:54 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		ft_how_arg(char **argv)
 
 int		ft_how_dir(t_btree *root, int i)
 {
+	if (!root)
+		return (0);
 	i++;
 	if (root->left)
 		i = ft_how_dir(root->left, i);
@@ -56,4 +58,16 @@ int		ft_strofpoint(char *str)
 		str++;
 	}
 	return (0);
+}
+
+char	*tname_file(char *str)
+{
+	char	*tmp;
+
+	while ((str = ft_strchr(str, '/')))
+	{
+		str++;
+		tmp = str;
+	}
+	return (tmp);
 }

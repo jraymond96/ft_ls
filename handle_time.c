@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:49:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/18 08:02:42 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 04:58:28 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_file_time(struct stat *allstats, t_finfo *file_st)
 {
-	char 	*file_time;
+	char	*file_time;
 	time_t	curr_time;
 
 	time(&curr_time);
