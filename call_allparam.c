@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 06:30:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/23 15:49:39 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 06:41:35 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	ft_printinfo(t_finfo *info, t_lenmax *max)
 	{
 		padd = ft_ilen(info->n_link);
 		padd = max->lenmax_link - padd + 12;
-		printf("%-*s%d ", padd, info->mode, info->n_link);
-		printf("%-*s", (max->lenmax_u + 2), info->n_id_user);
-		printf("%-*s", (max->lenmax_g + 2), info->n_id_group);
-		printf("%*d ", max->lenmax_oct, info->size);
-		printf("%s ", info->timeday);
+		ft_printf("%-*s%d ", padd, info->mode, info->n_link);
+		ft_printf("%-*s", (max->lenmax_u + 2), info->n_id_user);
+		ft_printf("%-*s", (max->lenmax_g + 2), info->n_id_group);
+		ft_printf("%*d ", max->lenmax_oct, info->size);
+		ft_printf("%s ", info->timeday);
 		if (info->link)
 		{
-			printf("%s", info->name);
-			printf(" -> %s\n", info->link);
+			ft_printf("%s", info->name);
+			ft_printf(" -> %s\n", info->link);
 		}
 		else
-			printf("%s\n", info->name);
+			ft_printf("%s\n", info->name);
 	}
 }
 

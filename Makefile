@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/09 04:54:43 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/09 06:19:10 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRCS = handle_mode.c \
 	   select_insertree.c \
 	   recur_solve.c \
 	   take_info_file.c \
-	   error.c
+	   error.c \
+	   ptr_fonc_print.c
 
 #COLORS
 

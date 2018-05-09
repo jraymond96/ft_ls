@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 04:54:55 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 05:53:10 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ void	ft_free(t_btree **root, char **str)
 
 void	if_param(t_btree *param, int argc, t_recur *rec)
 {
+	t_btree	*endtree;
+
+	if (argc & MIN_R)
+		endtree = ft_btreeend(param->right, -1);
+	else
+		endtree = ft_btreeend(param->right, 0);
 	if (!param)
 		return ;
 	rec->nb_arg = ft_how_dir(param, -1);
@@ -69,7 +75,7 @@ void	if_param(t_btree *param, int argc, t_recur *rec)
 			ft_putchar('\n');
 	}
 	if (param->right)
-		ft_call_allfile(param->right, argc, ft_btreeend(param, 1), rec);
+		ft_call_allfile(param->right, argc, endtree, rec);
 }
 
 int		main(int argc, char **argv)

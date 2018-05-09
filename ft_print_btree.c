@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 03:09:10 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 06:39:59 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,126 +14,64 @@
 #include "ft_ls.h"
 #include "./ft_printf/ft_printf.h"
 
-void	ft_print_treel(t_btree *root, t_lenmax *max)
+void	print_tree(t_btree *root, t_lenmax *max, void (print)(t_btree *,
+						t_lenmax *))
 {
 	t_btree	*elem;
 
 	elem = root;
 	if (elem->left)
-		ft_print_treel((t_btree *)elem->left, max);
-	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
-	{
-		if (PATH->size != -1)
-		{
-			ft_printf("%s  %*d %-*s  %-*s   %*d %s %s", \
-			PATH->mode, max->lenmax_link, PATH->n_link, max->lenmax_u, \
-			PATH->n_id_user, max->lenmax_g, PATH->n_id_group, max->lenmax_oct, \
-			PATH->size, PATH->timeday, PATH->name);
-		}
-		else
-		{
-			ft_printf("%s  %*d %-*s  %-*s   %*d, %*d %s %s", \
-			PATH->mode, max->lenmax_link, PATH->n_link, max->lenmax_u, \
-			PATH->n_id_user, max->lenmax_g, PATH->n_id_group, \
-			max->lenmax_majo, PATH->major, max->lenmax_mino, PATH->minor, \
-			PATH->timeday, PATH->name);
-		}
-		if (((t_finfo *)root->ptrdata)->link)
-			ft_printf(" -> %s\n", ((t_finfo *)root->ptrdata)->link);
-		else
-			ft_putchar('\n');
-	}
+		print_tree((t_btree *)elem->left, max, print);
+	print(elem, max);
 	if (elem->right)
-		ft_print_treel((t_btree *)elem->right, max);
+		print_tree((t_btree *)elem->right, max, print);
 }
 
-void	ft_print_treerl(t_btree *root, t_lenmax *max)
+void	print_revtree(t_btree *root, t_lenmax *max, void (print)(t_btree *,
+							t_lenmax *))
 {
 	t_btree	*elem;
 
 	elem = root;
 	if (elem->right)
-		ft_print_treerl((t_btree *)elem->right, max);
-	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
-	{
-		if (PATH->size != -1)
-		{
-			ft_printf("%s  %*d %-*s  %-*s   %*d %s %s", \
-			PATH->mode, max->lenmax_link, PATH->n_link, max->lenmax_u, \
-			PATH->n_id_user, max->lenmax_g, PATH->n_id_group, max->lenmax_oct, \
-			PATH->size, PATH->timeday, PATH->name);
-		}
-		else
-		{
-			ft_printf("%s  %*d %-*s  %-*s   %*d, %*d %s %s", \
-			PATH->mode, max->lenmax_link, PATH->n_link, max->lenmax_u, \
-			PATH->n_id_user, max->lenmax_g, PATH->n_id_group, \
-			max->lenmax_majo, PATH->major, max->lenmax_mino, PATH->minor, \
-			PATH->timeday, PATH->name);
-		}
-		if (((t_finfo *)root->ptrdata)->link)
-			ft_printf(" -> %s\n", ((t_finfo *)root->ptrdata)->link);
-		else
-			ft_putchar('\n');
-	}
+		print_revtree((t_btree *)elem->right, max, print);
+	print(elem, max);
 	if (elem->left)
-		ft_print_treerl((t_btree *)elem->left, max);
+		print_revtree((t_btree *)elem->left, max, print);
 }
 
-void	ft_print_treen(t_btree *root, t_lenmax *max)
+void	print_related_flags(t_btree *root, t_lenmax *max, void **ptr_fonc)
 {
-	t_btree	*elem;
+	int	x;
 
-	elem = root;
-	if (elem->left)
-		ft_print_treen((t_btree *)elem->left, max);
-	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
-		ft_putendl(((t_finfo *)root->ptrdata)->name);
-	if (elem->right)
-		ft_print_treen((t_btree *)elem->right, max);
-}
-
-void	ft_print_treern(t_btree *root, t_lenmax *max)
-{
-	t_btree	*elem;
-
-	elem = root;
-	if (elem->right)
-		ft_print_treern((t_btree *)elem->right, max);
-	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
-		ft_putendl(((t_finfo *)root->ptrdata)->name);
-	if (elem->left)
-		ft_print_treern((t_btree *)elem->left, max);
+	x = 0;
+	if (!(max->flags & MIN_L))
+		x = 1;
+	if (max->flags & MIN_R)
+		print_revtree(root, max, ptr_fonc[x]);
+	else
+		print_tree(root, max, ptr_fonc[x]);
 }
 
 void	ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec)
 {
-	int	res;
+	int		res;
+	void	*ptr[3];
 
+	ptr[0] = long_print;
+	ptr[1] = normal_print;
+	ptr[2] = NULL;
 	if (rec->nb_arg > 1)
 		ft_printf("%s:\n", max->path);
 	else
 	{
-		if (max->flags & MAX_R && rec->a & (1<<0))
+		if (max->flags & MAX_R && rec->a & (1 << 0))
 			ft_printf("%s:\n", max->path);
 	}
 	if (max->flags & MAX_R)
-		rec->a |= (1<<0);
+		rec->a |= (1 << 0);
 	res = is_empty(root, 0);
 	if (max->flags & MIN_L && (max->total_size || max->flags & MIN_A || res))
-		printf("total %lld\n", max->total_size);
-	if (MIN_L & max->flags)
-	{
-		if (MIN_R & max->flags)
-			ft_print_treerl(root, max);
-		else
-			ft_print_treel(root, max);
-	}
-	else
-	{
-		if (MIN_R & max->flags)
-			ft_print_treern(root, max);
-		else
-			ft_print_treen(root, max);
-	}
+		ft_printf("total %lld\n", max->total_size);
+	print_related_flags(root, max, &ptr[0]);
 }

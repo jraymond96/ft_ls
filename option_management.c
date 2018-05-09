@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 01:09:43 by jraymond          #+#    #+#             */
-/*   Updated: 2018/04/25 15:07:58 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 06:40:35 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		ft_option_management(char const **arg, char **flags)
 	{
 		if (flags)
 			ft_memdel((void **)flags);
-		printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n", \
+		ft_printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n", \
 				arg[i / 10][i % 10]);
 		return (-1);
 	}

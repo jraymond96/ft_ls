@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 04:54:10 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 06:42:19 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <pwd.h>
 # include "lib/libft.h"
 # include "./ft_printf/ft_printf.h"
-# include <stdio.h> /* A ENLEVER */
-# define PATH ((t_finfo *)root->ptrdata)
+# include <stdio.h>
+# define PATH ((t_finfo *)elem->ptrdata)
 /*
 **-----------------------------------STRUCTS------------------------------------
 */
@@ -95,9 +95,6 @@ t_list			*ft_lst_sort(t_list *b_list);
 t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,
 									t_lenmax *max);
 int				ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec);
-void			del(void *elem, size_t content_size);
-void			btdel(void *elem);
-void			btdelbis(void *elem);
 void			ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec);
 char			*ft_handle_link(char *path);
 int				ft_takeopt(char const **argv, const char *optstring,
@@ -119,5 +116,15 @@ void			ft_free_all(t_list **list, t_btree **root, DIR *dir,
 								char **path);
 int				ft_error(char *path, int nb_arg);
 char			*tname_file(char *str);
+
+/*
+**-------------------------------------ptr_fonc_print--------------------------
+*/
+
+void			long_print(t_btree *elem, t_lenmax *max);
+void			normal_print(t_btree *elem, t_lenmax *max);
+void			del(void *elem, size_t content_size);
+void			btdel(void *elem);
+void			btdelbis(void *elem);
 
 # endif
