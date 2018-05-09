@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 06:42:19 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 22:40:32 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void			ft_find_uid_gid(struct stat *allstats, t_finfo *file_st,
 									t_lenmax *max);
 long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 						t_lenmax *max);
-t_list			*ft_lst_sort(t_list *b_list);
 t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,
 									t_lenmax *max);
 int				ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec);
@@ -122,9 +121,10 @@ char			*tname_file(char *str);
 */
 
 void			long_print(t_btree *elem, t_lenmax *max);
-void			normal_print(t_btree *elem, t_lenmax *max);
+void			normal_print(t_btree *elem, t_lenmax *max, int len);
 void			del(void *elem, size_t content_size);
 void			btdel(void *elem);
 void			btdelbis(void *elem);
+int				lst_cmp(t_list *elem);
 
 # endif

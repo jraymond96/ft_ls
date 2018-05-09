@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:33:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 05:42:27 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 22:43:57 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ int		init_lenmax(char *path, DIR *dir, int flags, t_lenmax *max)
 	return (1);
 }
 
-t_list	*init_sort_list(t_list *b_list, int flags)
+t_list	*sort_list(t_list *b_list, int flags)
 {
-	b_list = ft_lst_sort(b_list);
+	void	*ptr_cmp;
+
+	ptr_cmp = lst_cmp;
+	b_list = ft_lst_sort(b_list, ptr_cmp);
 	if (flags & MIN_R)
 		b_list = ft_lstrev(b_list);
 	return (b_list);
@@ -43,7 +46,7 @@ char	*manage_path(char **all_path, char *path, t_list *elem)
 {
 	ft_putchar('\n');
 	path = *all_path;
-	*all_path = ft_strjoin(*all_path, elem->content);
+	*all_path = ft_strjoin(*all_path, ((t_finfo *)elem->content)->name);
 	return (path);
 }
 
@@ -60,7 +63,7 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec)
 		return (0);
 	root = ft_take_infofile(path, dir, &b_list, &lenmax);
 	all_path = ft_strjoin(path, "/");
-	elem = init_sort_list(b_list, flags);
+	elem = sort_list(b_list, flags);
 	ft_print_tree(root, &lenmax, rec);
 	if (flags & MAX_R)
 	{

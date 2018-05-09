@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:45:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 05:41:23 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 23:51:15 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,
 			{
 				if (max->flags & MIN_A || file_st.name[0] != '.')
 				{
-					elem = ft_lstnew(file_st.name, ft_strlen(file_st.name) + 1);
+					elem = ft_lstnew(&file_st, sizeof(t_finfo));
 					ft_lstaddback(b_list, elem);
 				}
 			}

@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/09 06:19:10 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/09 23:27:40 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ls
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 SRCS = handle_mode.c \
 	   handle_time.c \

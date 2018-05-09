@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 05:34:00 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 06:33:41 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/10 00:01:15 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,21 @@ void	long_print(t_btree *elem, t_lenmax *max)
 	}
 }
 
-void	normal_print(t_btree *elem, t_lenmax *max)
+void	normal_print(t_btree *elem, t_lenmax *max, int len)
 {
+/*	int	res;
+
+	*/(void)len;/*
+	res = max->nb_col / max->lenmax_name + 2;
+	res = len / res;
+	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
+		ft_printf("%-*s\n", res, PATH->name);*/
 	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
 		ft_putendl(PATH->name);
+}
+
+int		lst_cmp(t_list *elem)
+{
+	return (ft_strcmp(((t_finfo *)elem->content)->name,
+				((t_finfo *)elem->next->content)->name));
 }

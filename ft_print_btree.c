@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 06:39:59 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 07:33:58 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,44 @@
 #include "./ft_printf/ft_printf.h"
 
 void	print_tree(t_btree *root, t_lenmax *max, void (print)(t_btree *,
-						t_lenmax *))
+						t_lenmax *, int), int len)
 {
 	t_btree	*elem;
 
 	elem = root;
 	if (elem->left)
-		print_tree((t_btree *)elem->left, max, print);
-	print(elem, max);
+		print_tree((t_btree *)elem->left, max, print, len);
+	print(elem, max, len);
 	if (elem->right)
-		print_tree((t_btree *)elem->right, max, print);
+		print_tree((t_btree *)elem->right, max, print, len);
 }
 
 void	print_revtree(t_btree *root, t_lenmax *max, void (print)(t_btree *,
-							t_lenmax *))
+							t_lenmax *, int), int len)
 {
 	t_btree	*elem;
 
 	elem = root;
 	if (elem->right)
-		print_revtree((t_btree *)elem->right, max, print);
-	print(elem, max);
+		print_revtree((t_btree *)elem->right, max, print, len);
+	print(elem, max, len);
 	if (elem->left)
-		print_revtree((t_btree *)elem->left, max, print);
+		print_revtree((t_btree *)elem->left, max, print, len);
 }
 
 void	print_related_flags(t_btree *root, t_lenmax *max, void **ptr_fonc)
 {
 	int	x;
+	int	len;
 
 	x = 0;
+	len = ft_how_dir(root, -1);
 	if (!(max->flags & MIN_L))
 		x = 1;
 	if (max->flags & MIN_R)
-		print_revtree(root, max, ptr_fonc[x]);
+		print_revtree(root, max, ptr_fonc[x], ft_how_dir(root, 0));
 	else
-		print_tree(root, max, ptr_fonc[x]);
+		print_tree(root, max, ptr_fonc[x], ft_how_dir(root, 0));
 }
 
 void	ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec)

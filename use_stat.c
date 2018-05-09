@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 12:02:11 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/02 18:20:19 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 22:06:34 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,10 @@
 
 int		ft_call_stat(struct stat *allstats, int flags, char *path)
 {
-	char	*str;
-
 	(void)flags;
 	if ((lstat(path, allstats) == -1))
-	{
-		str = ft_strjoin("ls: ", path);
-		perror(str);
-	}
+		ft_printf("ls: %s: %s\n", path, strerror(errno));
 	else
 		return (0);
-	ft_memdel((void **)&str);
 	return (-1);
 }

@@ -6,24 +6,11 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 05:53:10 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/09 22:44:23 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void	ft_free_all(t_list **list, t_btree **root, DIR *dir, char **path)
-{
-	void	*ptr_tl;
-	void	*ptr_tbt;
-
-	ptr_tl = del;
-	ptr_tbt = btdel;
-	ft_lstdel(list, ptr_tl);
-	ft_btreedel(root, ptr_tbt);
-	ft_memdel((void **)path);
-	closedir(dir);
-}
 
 void	ft_call_allfile(t_btree *root, int flags, t_btree *end, t_recur *rec)
 {
@@ -61,6 +48,8 @@ void	if_param(t_btree *param, int argc, t_recur *rec)
 {
 	t_btree	*endtree;
 
+	if (!param)
+		return ;
 	if (argc & MIN_R)
 		endtree = ft_btreeend(param->right, -1);
 	else
@@ -99,7 +88,8 @@ int		main(int argc, char **argv)
 		ft_recur_solve(path, dir, argc, &rec);
 		ft_memdel((void **)&path);
 	}
-	if_param(param, argc, &rec);
+	else
+		if_param(param, argc, &rec);
 	ft_free(&param, &opt);
 	return (0);
 }
