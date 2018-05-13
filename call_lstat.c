@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_link.c                                      :+:      :+:    :+:   */
+/*   call_lstat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 20:18:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/12 05:13:52 by jraymond         ###   ########.fr       */
+/*   Created: 2018/05/12 04:27:09 by jraymond          #+#    #+#             */
+/*   Updated: 2018/05/12 04:27:11 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char	*ft_handle_link(char *path)
+int		call_lstat(struct stat *allstats, char *path)
 {
-	char	buf[512];
-	char	*link;
-	int		ret;
-
-	ret = readlink(path, buf, 512);
-	if (ret == -1)
-		return (NULL);
+	if ((lstat(path, allstats) == -1))
+		ft_printf("ls: %s: %s\n", path, strerror(errno));
 	else
-	{
-		link = ft_memalloc(ret + 1);
-		ft_strncpy(link, buf, ret);
-	}
-	return (link);
+		return (0);
+	return (-1);
 }

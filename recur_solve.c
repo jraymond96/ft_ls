@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:33:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 22:43:57 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/12 01:37:00 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@ int		init_lenmax(char *path, DIR *dir, int flags, t_lenmax *max)
 
 t_list	*sort_list(t_list *b_list, int flags)
 {
-	void	*ptr_cmp;
+	void 	*ptr[3];
+	int		x;
 
-	ptr_cmp = lst_cmp;
-	b_list = ft_lst_sort(b_list, ptr_cmp);
+	ptr[0] = lst_ncmp;
+	ptr[1] = lst_tcmp;
+	ptr[2] = NULL;
+	x = 0;
+	if (flags & MIN_T || flags & MIN_U)
+		x = 1;
+	b_list = ft_lst_sort(b_list, ptr[x]);
 	if (flags & MIN_R)
 		b_list = ft_lstrev(b_list);
 	return (b_list);

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 01:09:43 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 06:40:35 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/10 01:43:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	ft_applymask(int *i, char flags)
 		*i |= MIN_L;
 	else if (flags == 'r')
 		*i |= MIN_R;
-	else
+	else if (flags == 't')
 		*i |= MIN_T;
+	else
+		*i |= MIN_U;
 }
 
 int		ft_binaryflags(char *flags)
@@ -33,7 +35,7 @@ int		ft_binaryflags(char *flags)
 	i = 0;
 	while (*flags)
 	{
-		if (ft_strchr("Ralrt", *flags))
+		if (ft_strchr("Ralrtu", *flags))
 			ft_applymask(&i, *flags);
 		flags++;
 	}
@@ -73,11 +75,11 @@ int		ft_option_management(char const **arg, char **flags)
 	i = 0;
 	if (!arg[1])
 		return (0);
-	if ((i = ft_takeopt((const char **)arg, "Ralrt", flags)) > 0)
+	if ((i = ft_takeopt((const char **)arg, "Ralrtu", flags)) > 0)
 	{
 		if (flags)
 			ft_memdel((void **)flags);
-		ft_printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n", \
+		ft_printf("ls: illegal option -- %c\nusage: ls [-Ralrtu] [file ...]\n", \
 				arg[i / 10][i % 10]);
 		return (-1);
 	}

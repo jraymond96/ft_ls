@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:45:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 23:51:15 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/13 02:45:45 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 	if ((len = ft_strlen(file_st->name)) > max->lenmax_name)
 		max->lenmax_name = len;
 	file_st->link = ft_handle_link(all_path);
-	if ((ft_call_stat(allstats, max->flags, all_path)) == -1)
+	if ((call_lstat(allstats, all_path)) == -1)
 		return (-1);
 	if ((len = ft_ilen(allstats->st_nlink)) > max->lenmax_link)
 		max->lenmax_link = len;
 	file_st->n_link = allstats->st_nlink;
-	ft_file_time(allstats, file_st);
+	ft_file_time(allstats, file_st, max->flags);
 	ft_handle_mode(allstats, file_st);
 	ft_file_size(allstats, file_st, max);
 	ft_find_uid_gid(allstats, file_st, max);

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_link.c                                      :+:      :+:    :+:   */
+/*   ptr_fonc_sortlst.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 20:18:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/12 05:13:52 by jraymond         ###   ########.fr       */
+/*   Created: 2018/05/10 00:42:50 by jraymond          #+#    #+#             */
+/*   Updated: 2018/05/10 01:52:12 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char	*ft_handle_link(char *path)
+int		lst_ncmp(t_list *elem)
 {
-	char	buf[512];
-	char	*link;
-	int		ret;
+	return (ft_strcmp(((t_finfo *)elem->content)->name,
+				((t_finfo *)elem->next->content)->name));
+}
 
-	ret = readlink(path, buf, 512);
-	if (ret == -1)
-		return (NULL);
-	else
-	{
-		link = ft_memalloc(ret + 1);
-		ft_strncpy(link, buf, ret);
-	}
-	return (link);
+int		lst_tcmp(t_list *elem)
+{
+
+	return (((t_finfo *)elem->content)->time_n -
+				((t_finfo *)elem->next->content)->time_n);
 }

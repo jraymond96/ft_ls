@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 16:22:37 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 22:44:23 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/12 03:59:53 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_call_allfile(t_btree *root, int flags, t_btree *end, t_recur *rec)
 	if (!dir)
 		ft_error(root->ptrdata, rec->nb_arg);
 	else
-		ft_recur_solve(root->ptrdata, dir, flags, rec);
+		ft_recur_solve(((t_linfo *)root->ptrdata)->name, dir, flags, rec);
 	if (root != end)
 		ft_putchar('\n');
 	if (root->right)
@@ -67,6 +67,13 @@ void	if_param(t_btree *param, int argc, t_recur *rec)
 		ft_call_allfile(param->right, argc, endtree, rec);
 }
 
+void	didi(void *ptr)
+{
+	if (!ptr)
+		ft_putendl("---------------");
+	ft_printf("name : %s\n", ((t_linfo *)ptr)->name);
+}
+
 int		main(int argc, char **argv)
 {
 	DIR				*dir;
@@ -74,12 +81,16 @@ int		main(int argc, char **argv)
 	char			*opt;
 	t_recur			rec;
 	t_btree			*param;
+	void			*ptr;
 
+	ptr = didi;
 	opt = NULL;
 	if ((argc = ft_option_management((const char **)argv, &opt)) == -1)
 		return (0);
 	ft_bzero(&rec, sizeof(t_recur));
 	param = ft_sorting_param((char const **)argv, argc);
+	ft_printf("{%s}\n", ((t_linfo *)param->right->ptrdata)->name);
+	ft_browsetree(param, ptr);
 	if (!param && ft_how_arg(argv) == 0)
 	{
 		if (!(dir = opendir("./")))

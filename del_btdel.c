@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 15:44:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 23:57:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/13 04:37:38 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ void	ft_free_all(t_list **list, t_btree **root, DIR *dir, char **path)
 	ft_btreedel(root, ptr_tbt);
 	ft_memdel((void **)path);
 	closedir(dir);
+}
+
+void	frefre(void *elem)
+{
+	ft_memdel((void **)&((t_finfo *)elem)->link);
+	ft_memdel((void **)&((t_finfo *)elem)->n_id_user);
+	ft_memdel((void **)&((t_finfo *)elem)->n_id_group);
+	ft_memdel((void **)&elem);
 }

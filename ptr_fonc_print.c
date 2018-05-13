@@ -6,13 +6,19 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 05:34:00 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/10 00:01:15 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/13 04:26:25 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <stdio.h>
 
-void	long_print(t_btree *elem, t_lenmax *max)
+static t_mask	g_mask[] = {
+	{'R', MAX_R}, {'a', MIN_A}, {'l', MIN_L}, {'r', MIN_R},
+	{'t', MIN_T}
+};
+
+/*void	long_print(t_btree *elem, t_lenmax *max)
 {
 	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
 	{
@@ -40,19 +46,35 @@ void	long_print(t_btree *elem, t_lenmax *max)
 
 void	normal_print(t_btree *elem, t_lenmax *max, int len)
 {
-/*	int	res;
-
-	*/(void)len;/*
-	res = max->nb_col / max->lenmax_name + 2;
-	res = len / res;
-	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
-		ft_printf("%-*s\n", res, PATH->name);*/
+	(void)len;
 	if (max->flags & MIN_A || ((t_finfo *)elem->ptrdata)->name[0] != '.')
 		ft_putendl(PATH->name);
 }
-
-int		lst_cmp(t_list *elem)
+*/
+int		astobin(char *arg, int x, int y, int flags)
 {
-	return (ft_strcmp(((t_finfo *)elem->content)->name,
-				((t_finfo *)elem->next->content)->name));
+	char	*ptr;
+
+	while (arg[++x])
+	{
+		if ((ptr = ft_strchr("Ralrt", arg[x])))
+		{
+			y = -1;
+			while (++y < 5)
+			{
+				if (g_mask[y].flags == *ptr)
+				{
+					flags |= g_mask[y].mask;
+					break ;
+				}
+			}
+		}
+		else
+		{
+			printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n",
+						arg[x]);
+			return (-1);
+		}
+	}
+	return (flags);
 }

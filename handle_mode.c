@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:50:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/09 04:58:54 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/13 04:49:58 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ void	ft_file_size(struct stat *allstats, t_finfo *file_st, t_lenmax *max)
 			max->lenmax_mino = len;
 		if ((len1 = ft_ilen(file_st->major)) > max->lenmax_majo)
 			max->lenmax_majo = len1;
-		res = max->lenmax_mino + max->lenmax_majo + 2;
-		if (res > max->lenmax_oct)
-			max->lenmax_oct = res;
 	}
+	if (ft_ilen(file_st->minor) < (len1 = ft_ilen(file_st->size)))
+		max->lenmax_mino = len1;
+	res = max->lenmax_mino + max->lenmax_majo + 2;
+	if (res > max->lenmax_oct)
+		max->lenmax_oct = res;
 }
 
 char	ft_file_type(struct stat *allstats)
