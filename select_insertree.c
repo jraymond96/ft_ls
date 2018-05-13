@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 19:07:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/13 05:03:16 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/13 09:26:22 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_btree	*select_inser(t_btree *root, t_finfo *info, t_lenmax *max)
 	ptrfonc[1] = inser_time;
 	ptrfonc[2] = NULL;
 	x = 0;
-	if (max->flags & MIN_T || max->flags & MIN_U)
+	if (max->flags & MIN_T)
 		x = 1;
 	return (ft_btreeinser(root, info, sizeof(t_finfo), ptrfonc[x]));
 }

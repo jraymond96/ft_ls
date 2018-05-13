@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:33:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/12 01:37:00 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/13 08:22:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		init_lenmax(char *path, DIR *dir, int flags, t_lenmax *max)
 	return (1);
 }
 
-t_list	*sort_list(t_list *b_list, int flags)
+/*t_list	*sort_list(t_list *b_list, int flags)
 {
 	void 	*ptr[3];
 	int		x;
@@ -39,9 +39,9 @@ t_list	*sort_list(t_list *b_list, int flags)
 	if (flags & MIN_R)
 		b_list = ft_lstrev(b_list);
 	return (b_list);
-}
+}*/
 
-t_list	*next_free(char **all_path, char *path, t_list *elem)
+/*t_list	*next_free(char **all_path, char *path, t_list *elem)
 {
 	ft_memdel((void **)all_path);
 	*all_path = path;
@@ -54,24 +54,23 @@ char	*manage_path(char **all_path, char *path, t_list *elem)
 	path = *all_path;
 	*all_path = ft_strjoin(*all_path, ((t_finfo *)elem->content)->name);
 	return (path);
-}
+}*/
 
 int		ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec)
 {
 	t_btree			*root;
-	t_list			*b_list;
-	t_list			*elem;
+	t_btree			*folder;
 	t_lenmax		lenmax;
 	char			*all_path;
 
-	b_list = NULL;
+	folder = NULL;
 	if (!(init_lenmax(path, dir, flags, &lenmax)))
 		return (0);
-	root = ft_take_infofile(path, dir, &b_list, &lenmax);
+	root = ft_take_infofile(path, dir, folder, &lenmax);
 	all_path = ft_strjoin(path, "/");
-	elem = sort_list(b_list, flags);
 	ft_print_tree(root, &lenmax, rec);
-	if (flags & MAX_R)
+	return (0);
+	/*if (flags & MAX_R)
 	{
 		while (elem)
 		{
@@ -81,5 +80,5 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec)
 		}
 	}
 	ft_free_all(&b_list, &root, dir, &all_path);
-	return (0);
+	return (0);*/
 }

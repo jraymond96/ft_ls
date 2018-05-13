@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:45:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/13 02:45:45 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/13 08:47:10 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,36 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 	ft_handle_mode(allstats, file_st);
 	ft_file_size(allstats, file_st, max);
 	ft_find_uid_gid(allstats, file_st, max);
+	file_st->max = max;
 	ft_memdel((void **)&all_path);
+	max->total_size += allstats->st_blocks;
 	return (allstats->st_blocks);
 }
 
-t_btree			*ft_take_infofile(char *path, DIR *dir, t_list **b_list,
+t_btree			*ft_take_infofile(char *path, DIR *dir, t_btree *folder,
 									t_lenmax *max)
 {
 	struct dirent	*fileinfo;
 	struct stat		allstats;
 	t_finfo			file_st;
 	t_btree			*root;
-	t_list			*elem;
 
 	root = NULL;
 	while ((fileinfo = readdir(dir)))
 	{
 		ft_bzero(&file_st, sizeof(t_finfo));
 		file_st.name = ft_strdup(fileinfo->d_name);
-		if ((max->total_size += ft_z(&allstats, path, &file_st, max)) != -1)
+		if (ft_z(&allstats, path, &file_st, max) != -1)
 		{
-			if (file_st.mode[0] == 'd' && ft_strofpoint(file_st.name) == -1)
+			
+			if (file_st.mode[0] == 'd')
 			{
 				if (max->flags & MIN_A || file_st.name[0] != '.')
-				{
-					elem = ft_lstnew(&file_st, sizeof(t_finfo));
-					ft_lstaddback(b_list, elem);
-				}
+					folder = ft_btreeinser(folder, &file_st, sizeof(t_infp),
+										ptrcmp(max->flags));
 			}
-			root = select_inser(root, &file_st, max);
+			if (max->flags & MIN_A || file_st.name[0] != '.')
+				root = select_inser(root, &file_st, max);
 		}
 	}
 	return (root);

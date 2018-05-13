@@ -6,44 +6,11 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 03:14:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/13 05:00:30 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/13 09:36:05 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void	lprint(void *elem)
-{
-	if (PATH->max->flags & MIN_A || PATH->name[0] != '.')
-	{
-		if (PATH->size != -1)
-		{
-			ft_printf("%s  %*d %-*s  %-*s   %*d %s %s",
-			PATH->mode, PATH->max->lenmax_link, PATH->n_link,
-			PATH->max->lenmax_u, PATH->n_id_user, PATH->max->lenmax_g,
-			PATH->n_id_group, PATH->max->lenmax_oct, PATH->size, PATH->timeday,
-			PATH->name);
-		}
-		else
-		{
-			ft_printf("%s  %*d %-*s  %-*s   %*d, %*d %s %s",
-			PATH->mode, PATH->max->lenmax_link, PATH->n_link,
-			PATH->max->lenmax_u, PATH->n_id_user, PATH->max->lenmax_g,
-			PATH->n_id_group, PATH->max->lenmax_majo, PATH->major,
-			PATH->max->lenmax_mino, PATH->minor, PATH->timeday, PATH->name);
-		}
-		if (PATH->link)
-			ft_printf(" -> %s\n", PATH->link);
-		else
-			ft_putchar('\n');
-	}
-}
-
-void	simpleprint(void *elem)
-{
-	if (PATH->max->flags & MIN_A || PATH->name[0] != '.')
-		ft_putendl(PATH->name);
-}
 
 int		ft_empty_f_info(t_finfo *file_st, t_btree *root, t_lenmax *max)
 {
@@ -91,9 +58,19 @@ void	call_files(t_btree *root, int flags)
 	ptr = frefre;
 	ft_bzero(&max, sizeof(t_lenmax));
 	root_inf = parsing_files(root, flags, &max, root_inf);
-	if (flags & MIN_L)
-		ft_browsetree(root_inf, lprint);
+	if (flags & MIN_R)
+	{
+		if (flags & MIN_L)
+			ft_revbrowsetree(root_inf, lprint);
+		else
+			ft_revbrowsetree(root_inf, simpleprint);
+	}
 	else
-		ft_browsetree(root_inf, simpleprint);
+	{
+		if (flags & MIN_L)
+			ft_browsetree(root_inf, lprint);
+		else
+			ft_browsetree(root_inf, simpleprint);
+	}
 	ft_btreedel(&root_inf, ptr);
 }

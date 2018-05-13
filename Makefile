@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/13 03:17:48 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/13 05:29:15 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/13 08:03:00 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,13 @@ all : libprintf
 					handle_link.c \
 					handle_uid_gid.c \
 					call_files.c \
-					del_btdel.c)
+					del_btdel.c \
+					take_info_file.c \
+					ft_print_btree.c \
+					small_fonc.c \
+					recur_solve.c \
+					info_term.c \
+					error.c)
 	@echo "\x1b[32ma.out -> created\x1b[0m"
 
 libprintf :
