@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 08:00:10 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/14 08:08:16 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/14 10:10:14 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ls
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 SRCS = 	mainbis.c \
 		get_param.c \

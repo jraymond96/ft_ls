@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 01:53:17 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 07:36:58 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/14 09:44:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	free_param(t_param **param)
 			ft_btreedel(&(*param)->dir, del_infp);
 		if ((*param)->file)
 			ft_btreedel(&(*param)->file, del_infp);
-		ft_memdel((void **)&param);
 	}
+	ft_memdel((void **)param);
 }
 
 int		main(int argc, char **argv)
@@ -79,5 +79,6 @@ int		main(int argc, char **argv)
 	}
 	else
 		ft_recur_solve("./", opendir("./"), argc, &rec);
+	free_param(&param);
 	return (0);
 }
