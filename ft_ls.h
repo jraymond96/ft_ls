@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 04:00:16 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/14 08:55:26 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,6 @@ typedef struct			s_fileinfo
 	t_lenmax			*max;
 }						t_finfo;
 
-
-typedef struct			s_little_inf
-{
-	char				*name;
-	size_t				time;
-}						t_linfo;
-
-typedef struct			s_choose
-{
-	struct stat			*stats;
-	int					flags;
-	t_btree				*parent;
-	struct s_little_inf	*ptr;
-}						t_choose;
-
 /*
 **-------------------------------------MASK-------------------------------------
 */
@@ -127,25 +112,11 @@ void			ft_find_uid_gid(struct stat *allstats, t_finfo *file_st,
 long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 						t_lenmax *max);
 char			*ft_handle_link(char *path);
-int				ft_takeopt(char const **argv, const char *optstring,
-								char **opt);
-int				ft_erroropt(int i, char const ** argv);
-int				ft_binaryflags(char *flags);
-int				ft_option_management(char const **arg, char **flags);
-t_btree			*ft_sorting_param(char const ** argv, int flags);
 int				ft_strofpoint(char *str);
-int				call_lstat(struct stat *allstats, char *path);
-int				ft_how_arg(char **argv);
-int				ft_getinf_term(t_lenmax *max);
-int				ft_how_dir(t_btree *root, int i);
-int				is_empty(t_btree *root, int i);
+
+
 
 int				ft_error(char *path, int nb_arg);
-char			*tname_file(char *str);
-t_btree			*ft_btree_start(t_btree *root, t_choose *data, char *path,
-									int branch);
-
-
 t_btree			*select_inser(t_btree *root, t_finfo *info, t_lenmax *max);
 void			ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec);
 t_btree			*ft_take_infofile(char *path, DIR *dir, t_btree **folder,
@@ -156,6 +127,10 @@ void			*ptrcmp(int flags);
 void			call_files(t_btree *root, int flags);
 void			ft_free_all(t_btree **root, t_btree **folder, DIR *dir,
 								t_lenmax *max);
+int				call_lstat(struct stat *allstats, char *path);
+char			*tname_file(char *str);
+int				is_empty(t_btree *root, int i);
+int				ft_getinf_term(t_lenmax *max);
 
 /*
 **-------------------------------------ptr_fonc_print--------------------------

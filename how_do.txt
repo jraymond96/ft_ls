@@ -1,6 +1,0 @@
--Faire une gestion d erreur de l'entree : renvoyer les flasg dispo si mauvais flags non existant.
-
-
-http://www.linuxpedia.fr/doku.php/droits_et_permissions_sous_linux
-
--Penser a géré pour le flags a les fichiers cache

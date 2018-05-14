@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    MakeMake                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/02/17 17:03:12 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/13 03:27:33 by jraymond         ###   ########.fr        #
+#    Created: 2018/05/14 08:00:18 by jraymond          #+#    #+#              #
+#    Updated: 2018/05/14 08:04:10 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,14 +57,14 @@ $(NAME) : $(OBJS)
 		@$(CC) $(FLAGS) -o $@ -c $^
 
 clean :
-		@make clean -C ./lib
-		@make clean -C ./ft_printf
+		@make clean -C lib
+		@make clean -C ft_printf
 		@rm -rf $(OBJS)
 		@echo "$(_RED)clean : $(_GREEN)Done$(_END)"
 
 fclean : clean
-		@make fclean -C ./lib
-		@make fclean -C ./ft_printf
+		@make fclean -C lib
+		@make fclean -C ft_printf
 		@rm -rf $(NAME)
 		@echo "$(_RED)fclean : $(_GREEN)Done$(_END)"
 

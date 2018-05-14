@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 19:07:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 04:04:32 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/14 07:19:32 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		inser_ascii(void *data1, void *data2)
 int		inser_time(void *data1, void *data2)
 {
 	int	res;
+
 	if ((res = ((t_finfo *)data2)->time_n - ((t_finfo *)data1)->time_n) == 0)
 		return (inser_ascii(data1, data2));
 	else
