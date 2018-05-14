@@ -6,11 +6,11 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/13 03:17:48 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/13 08:03:00 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/14 03:39:10 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 all : libprintf
 	@(gcc $(FLAGS)	mainbis.c \

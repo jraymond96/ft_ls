@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 15:44:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/13 04:37:38 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/14 04:00:37 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,26 @@ void	btdelbis(void *elem)
 
 void	btdel(void *elem)
 {
-	ft_memdel((void **)&((t_finfo *)elem)->name);
-	ft_memdel((void **)&((t_finfo *)elem)->link);
-	ft_memdel((void **)&((t_finfo *)elem)->n_id_user);
-	ft_memdel((void **)&((t_finfo *)elem)->n_id_group);
-	ft_memdel(&elem);
+	if (elem)
+	{
+		if (PATH->name)
+			ft_memdel((void **)&((t_finfo *)elem)->name);
+		if (PATH->link)
+			ft_memdel((void **)&((t_finfo *)elem)->link);
+		if (PATH->n_id_user)
+			ft_memdel((void **)&((t_finfo *)elem)->n_id_user);
+		if (PATH->n_id_group)
+			ft_memdel((void **)&((t_finfo *)elem)->n_id_group);
+		ft_memdel(&elem);
+	}
 }
 
-void	ft_free_all(t_list **list, t_btree **root, DIR *dir, char **path)
+void	ft_free_all(t_btree **root, t_btree **folder, DIR *dir, t_lenmax *max)
 {
-	void	*ptr_tl;
-	void	*ptr_tbt;
-
-	ptr_tl = del;
-	ptr_tbt = btdel;
-	ft_lstdel(list, ptr_tl);
-	ft_btreedel(root, ptr_tbt);
-	ft_memdel((void **)path);
+	ft_btreedel(root, btdel);
+	if (*folder)
+		ft_btreedel(folder, btdelbis);
+	ft_memdel((void **)&max->path);
 	closedir(dir);
 }
 

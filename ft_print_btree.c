@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/13 09:37:06 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/14 03:21:25 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	print_tree(t_btree *root, void (print)(void *))
 	elem = root;
 	if (elem->left)
 		print_tree((t_btree *)elem->left, print);
-	print(elem->ptrdata);
+	if (((t_finfo *)root->ptrdata)->max->flags & MIN_A ||
+			((t_finfo *)root->ptrdata)->name[0] != '.')
+		print(elem->ptrdata);
 	if (elem->right)
 		print_tree((t_btree *)elem->right, print);
 }
@@ -33,7 +35,9 @@ void	print_revtree(t_btree *root, void (print)(void *))
 	elem = root;
 	if (elem->right)
 		print_revtree((t_btree *)elem->right, print);
-	print(elem->ptrdata);
+	if (((t_finfo *)root->ptrdata)->max->flags & MIN_A ||
+			((t_finfo *)root->ptrdata)->name[0] != '.')
+		print(elem->ptrdata);
 	if (elem->left)
 		print_revtree((t_btree *)elem->left, print);
 }
@@ -63,8 +67,10 @@ void	ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec)
 		rec->a |= (1 << 0);
 	else
 		ft_printf("%s:\n", max->path);
-	res = is_empty(root, 0);
+	if (root)
+		res = is_empty(root, 0);
 	if (max->flags & MIN_L && (max->total_size || max->flags & MIN_A || res))
 		ft_printf("total %lld\n", max->total_size);
-	print_related_flags(root, max, &ptr[0]);
+	if (root)
+		print_related_flags(root, max, &ptr[0]);
 }

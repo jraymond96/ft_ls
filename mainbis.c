@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 01:53:17 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/13 09:36:07 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/14 04:04:57 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,8 @@ int		main(int argc, char **argv)
 		param = get_param(&argv[ret], argc);
 		if (param->file)
 			call_files(param->file, argc);
-		else
-			ft_putendl("FILE : NULL");
 		if (param->dir)
 			call_folder(param, argc);
-		else
-			ft_putendl("DIR : NULL");
 	}
 	else
 	{
