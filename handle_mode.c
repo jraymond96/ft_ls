@@ -6,12 +6,11 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:50:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/13 09:02:23 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 02:58:09 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include "lib/libft.h"
 #include "sys/types.h"
 
 void	ft_file_size(struct stat *allstats, t_finfo *file_st, t_lenmax *max)

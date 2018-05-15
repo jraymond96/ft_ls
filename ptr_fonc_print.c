@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 05:34:00 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 07:40:14 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 06:04:08 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		astobin(char *arg, int x, int y, int flags)
 		}
 		else
 		{
-			printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n",
+			ft_printf("ls: illegal option -- %c\nusage: ls [-Ralrt] [file ...]\n",
 						arg[x]);
 			return (-1);
 		}

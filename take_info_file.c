@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:45:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 06:42:46 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 06:55:03 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 {
 	char	*all_path;
 	int		len;
+	int		ret;
 
 	all_path = ft_strjoin(path, "/");
 	all_path = ft_strjoin_free(all_path, file_st->name, 1);
-	if ((call_lstat(allstats, all_path)) == -1)
+	if ((ret = call_llstat(allstats, all_path)) < 0)
 	{
 		ft_memdel((void **)&all_path);
 		return (-1);
 	}
+	if (ret == 2)
+		file_st->n_perm |= 1;
 	if ((len = ft_strlen(file_st->name)) > max->lenmax_name)
 		max->lenmax_name = len;
 	file_st->link = ft_handle_link(all_path);
@@ -67,16 +70,17 @@ t_btree			*ft_take_infofile(char *path, DIR *dir, t_btree **folder,
 	struct stat		allstats;
 	t_finfo			file_st;
 	t_btree			*root;
+	int				ret;
 
 	root = NULL;
 	while ((fileinfo = readdir(dir)))
 	{
 		ft_bzero(&file_st, sizeof(t_finfo));
 		file_st.name = ft_strdup(fileinfo->d_name);
-		if (ft_z(&allstats, path, &file_st, max) != -1)
+		if ((ret = ft_z(&allstats, path, &file_st, max)) != -1)
 		{
-			if (file_st.mode[0] == 'd' && strofpoint(file_st.name) &&
-					(max->flags & MIN_A || file_st.name[0] != '.'))
+			if ((file_st.mode[0] == 'd' && strofpoint(file_st.name) &&
+					(max->flags & MIN_A || file_st.name[0] != '.')))
 				*folder = ft_btreeinser(*folder, &file_st, sizeof(t_finfo),
 											ptrcmp(max->flags));
 			root = select_inser(root, &file_st, max);

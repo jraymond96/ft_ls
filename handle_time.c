@@ -6,12 +6,12 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:49:29 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/13 04:39:55 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 01:47:01 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include "lib/libft.h"
+#include <time.h>
 
 void	ft_utime(struct stat *allstats, t_finfo *file_st)
 {

@@ -6,11 +6,10 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 15:44:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 06:35:33 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 01:43:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/libft.h"
 #include "ft_ls.h"
 
 void	del(void *elem, size_t content_size)

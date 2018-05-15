@@ -6,12 +6,14 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 17:27:02 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 06:33:34 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 06:05:33 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/libft.h"
 #include "ft_ls.h"
+#include <sys/types.h>
+#include <pwd.h>
+#include <grp.h>
 
 void	ft_find_uid_gid(struct stat *allstats, t_finfo *file_st, t_lenmax *max)
 {

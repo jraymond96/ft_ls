@@ -6,11 +6,10 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:23:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 03:21:25 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 06:30:25 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/libft.h"
 #include "ft_ls.h"
 #include "./ft_printf/ft_printf.h"
 
@@ -63,6 +62,8 @@ void	ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec)
 	ptr[0] = lprint;
 	ptr[1] = simpleprint;
 	ptr[2] = NULL;
+	if (!max->path)
+		ft_putstr("NULL NULL NULL\n");
 	if (rec->nb_arg <= 1 && !(rec->a & (1 << 0)))
 		rec->a |= (1 << 0);
 	else

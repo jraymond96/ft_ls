@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 08:00:10 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/14 10:10:14 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/15 01:36:58 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror -g
 
-SRCS = 	mainbis.c \
+SRCS = 	main.c \
 		get_param.c \
 		ptr_btree.c \
 		select_insertree.c \

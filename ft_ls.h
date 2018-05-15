@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/14 08:55:26 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 06:39:23 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@
 # include <time.h>
 # include <stdlib.h>
 # include <dirent.h>
-# include <time.h>
-# include <grp.h>
-# include <pwd.h>
 # include "lib/libft.h"
 # include "./ft_printf/ft_printf.h"
-# include <stdio.h>
 # define PATH ((t_finfo *)elem)
 /*
 **-----------------------------------STRUCTS------------------------------------
@@ -78,8 +74,8 @@ typedef struct			s_fileinfo
 	char				*link;
 	char				mode[11];
 	char				timeday[13];
-	unsigned int		null : 1;
 	int					n_link;
+	unsigned int		n_perm : 1;
 	int					minor;
 	int					major;
 	time_t				time_n;
@@ -128,6 +124,7 @@ void			call_files(t_btree *root, int flags);
 void			ft_free_all(t_btree **root, t_btree **folder, DIR *dir,
 								t_lenmax *max);
 int				call_lstat(struct stat *allstats, char *path);
+int				call_llstat(struct stat *allstats, char *path);
 char			*tname_file(char *str);
 int				is_empty(t_btree *root, int i);
 int				ft_getinf_term(t_lenmax *max);
