@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 01:37:54 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 02:24:01 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 08:42:48 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 void	call_recur(t_btree *root, int flags, t_recur *rec, t_btree *end)
 {
-	DIR		*dir;
-
 	if (root->left && !(flags & MIN_R))
 		call_recur(root->left, flags, rec, end);
 	else if (root->right && flags & MIN_R)
 		call_recur(root->right, flags, rec, end);
-	dir = opendir(((t_infp *)root->ptrdata)->name);
-	ft_recur_solve(((t_infp *)root->ptrdata)->name, dir, flags, rec);
+	ft_recur_solve(INFP->name, opendir(INFP->name), flags, rec);
 	if (root != end)
 		ft_putchar('\n');
 	if (root->right && !(flags & MIN_R))

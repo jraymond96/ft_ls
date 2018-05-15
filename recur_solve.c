@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:33:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 06:55:06 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 08:07:38 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,8 @@ void	recur(void *elem)
 	if (PATH->n_perm)
 		ft_printf("%s:\n", PATH->max->path);
 	else
-	{
-
 		ft_recur_solve(PATH->max->path, opendir(PATH->max->path),
 						PATH->max->flags, PATH->max->rec);
-	}
 	ft_memdel((void **)&PATH->max->path);
 	PATH->max->path = tmp;
 }

@@ -6,11 +6,20 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:45:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 06:55:03 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 07:55:45 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void			ft_zbis(struct stat *allstats, t_finfo *file_st, t_lenmax *max)
+{
+	file_st->n_link = allstats->st_nlink;
+	ft_file_time(allstats, file_st, max->flags);
+	ft_handle_mode(allstats, file_st);
+	ft_file_size(allstats, file_st, max);
+	ft_find_uid_gid(allstats, file_st, max);
+}
 
 long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 						t_lenmax *max)
@@ -33,11 +42,7 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 	file_st->link = ft_handle_link(all_path);
 	if ((len = ft_ilen(allstats->st_nlink)) > max->lenmax_link)
 		max->lenmax_link = len;
-	file_st->n_link = allstats->st_nlink;
-	ft_file_time(allstats, file_st, max->flags);
-	ft_handle_mode(allstats, file_st);
-	ft_file_size(allstats, file_st, max);
-	ft_find_uid_gid(allstats, file_st, max);
+	ft_zbis(allstats, file_st, max);
 	file_st->max = max;
 	max->total_size += allstats->st_blocks;
 	ft_memdel((void **)&all_path);

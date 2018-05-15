@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 06:39:23 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/15 09:48:10 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include "lib/libft.h"
 # include "./ft_printf/ft_printf.h"
 # define PATH ((t_finfo *)elem)
+# define INFP ((t_infp *)root->ptrdata)
+
 /*
 **-----------------------------------STRUCTS------------------------------------
 */
@@ -109,9 +111,6 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 						t_lenmax *max);
 char			*ft_handle_link(char *path);
 int				ft_strofpoint(char *str);
-
-
-
 int				ft_error(char *path, int nb_arg);
 t_btree			*select_inser(t_btree *root, t_finfo *info, t_lenmax *max);
 void			ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec);
@@ -151,5 +150,5 @@ void			del_infp(void *ptrdata);
 void			frefre(void *elem);
 void			simpleprint(void *elem);
 void			lprint(void *elem);
-	
-# endif
+
+#endif
