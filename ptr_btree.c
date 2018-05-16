@@ -6,26 +6,11 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 05:09:18 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 08:42:29 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/16 18:45:54 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-int		p_inser_ascii(void *data1, void *data2)
-{
-	return (ft_strcmp(((t_infp *)data1)->name, ((t_infp*)data2)->name));
-}
-
-int		p_inser_time(void *data1, void *data2)
-{
-	int	res;
-
-	if ((res = ((t_infp *)data2)->time - ((t_infp *)data1)->time) == 0)
-		return (inser_ascii(data1, data2));
-	else
-		return (res);
-}
 
 void	del_infp(void *ptrdata)
 {
@@ -35,7 +20,7 @@ void	del_infp(void *ptrdata)
 
 void	lprint(void *elem)
 {
-	if (PATH->size != -1)
+	if (!(PATH->mm & (1 << 0)))
 	{
 		ft_printf("%s  %*d %-*s  %-*s   %*d %s %s",
 		PATH->mode, PATH->max->lenmax_link, PATH->n_link,

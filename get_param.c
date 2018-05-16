@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 03:31:01 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 09:37:04 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/16 18:46:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 void		*ptrcmp(int flags)
 {
-	void	*ptr[2];
+	void	*ptr[3];
 	int		x;
 
 	ptr[0] = p_inser_ascii;
 	ptr[1] = p_inser_time;
+	ptr[2] = p_inser_size;
 	x = 0;
 	if (flags & MIN_T)
 		x = 1;
 	return (ptr[x]);
+}
+
+void		init_info(t_infp *info, struct stat *stats, char *argv)
+{
+			info->name = ft_strdup(argv);
+			info->time = stats->st_mtime;
 }
 
 t_param		*get_param(char **argv, int flags)
@@ -38,8 +45,7 @@ t_param		*get_param(char **argv, int flags)
 	{
 		if (call_lstat(&stats, *argv) != -1)
 		{
-			info.name = ft_strdup(*argv);
-			info.time = stats.st_mtime;
+			init_info(&info, &stats, *argv);
 			if (S_ISDIR(stats.st_mode))
 				param->dir = ft_btreeinser(param->dir, &info, sizeof(t_infp),
 											ptr);

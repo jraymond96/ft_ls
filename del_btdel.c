@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 15:44:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 01:43:13 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:26:28 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	ft_free_all(t_btree **root, t_btree **folder, DIR *dir, t_lenmax *max)
 		ft_btreedel(root, btdel);
 	if (*folder)
 		ft_btreedel(folder, btdelbis);
-	ft_memdel((void **)&max->path);
+	if (max->path)
+		ft_memdel((void **)&max->path);
 	closedir(dir);
 }
 

@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 08:00:10 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/15 01:36:58 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/16 18:46:52 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS = 	main.c \
 		ptr_btree.c \
 		select_insertree.c \
 		call_lstat.c \
-		ptr_fonc_print.c \
+		astobin.c \
 		handle_mode.c \
 		handle_time.c \
 		handle_link.c \
@@ -33,7 +33,8 @@ SRCS = 	main.c \
 		small_fonc.c \
 		recur_solve.c \
 		info_term.c \
-		error.c
+		error.c \
+		ptr_inser.c
 
 #COLORS
 

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 03:14:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 08:42:25 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/16 18:38:42 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_empty_f_info(t_finfo *file_st, t_btree *root, t_lenmax *max)
 	struct stat	allstats;
 	int			len;
 
-	if ((call_lstat(&allstats, INFP->link)) == -1)
+	if ((call_lstat(&allstats, INFP->name)) == -1)
 		return (-1);
 	file_st->name = ((t_infp *)root->ptrdata)->name;
 	file_st->link = ft_handle_link(((t_infp *)root->ptrdata)->name);

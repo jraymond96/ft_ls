@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:45:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 07:55:45 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/16 18:43:30 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ t_btree			*ft_take_infofile(char *path, DIR *dir, t_btree **folder,
 		{
 			if ((file_st.mode[0] == 'd' && strofpoint(file_st.name) &&
 					(max->flags & MIN_A || file_st.name[0] != '.')))
-				*folder = ft_btreeinser(*folder, &file_st, sizeof(t_finfo),
-											ptrcmp(max->flags));
+				*folder = select_inser(*folder, &file_st, max);
 			root = select_inser(root, &file_st, max);
 		}
 		else

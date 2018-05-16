@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/15 09:48:10 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/16 16:59:24 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef	struct			s_info_param
 {
 	char				*name;
 	size_t				time;
+	int					size;
 }						t_infp;
 
 typedef struct			s_info_recur
@@ -70,6 +71,7 @@ typedef	struct			s_info_padding
 
 typedef struct			s_fileinfo
 {
+	unsigned int		mm : 1;
 	char				*name;
 	char				*n_id_user;
 	char				*n_id_group;
@@ -95,6 +97,8 @@ typedef struct			s_fileinfo
 # define MIN_R (1 << 3)
 # define MIN_T (1 << 4)
 # define MIN_U (1 << 5)
+# define MAX_U (1 << 6)
+# define MAX_S (1 << 7)
 
 /*
 **----------------------------------FONCTIONS-----------------------------------
@@ -144,6 +148,7 @@ int				inser_ascii(void *data1, void *data2);
 
 int				p_inser_time(void *data1, void *data2);
 int				p_inser_ascii(void *data1, void *data2);
+int				p_inser_size(void *data1, void *data2);
 void			print(void *ptrdata);
 int				astobin(char *arg, int x, int y, int flags);
 void			del_infp(void *ptrdata);
