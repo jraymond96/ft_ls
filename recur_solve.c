@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:33:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/17 14:43:50 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/17 16:44:57 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec)
 		ft_print_tree(root, &lenmax, rec);
 	if (ft_strcmp(path, "./") != 0)
 		lenmax.path = ft_strjoin(lenmax.path, "/");
+	else
+		lenmax.path = NULL;
 	if (flags & MAX_R && folder)
 	{
 		if (flags & MIN_R)
