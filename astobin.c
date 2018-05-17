@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 05:34:00 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/16 16:23:11 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/17 14:03:32 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_mask	g_mask[] = {
 	{'t', MIN_T}, {'u', MIN_U}, {'U', MAX_U}, {'S', MAX_S}
 };
 
-void		priority(int *flags, int y)
+void	priority(int *flags, int y)
 {
 	if (y > 4)
 	{

@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 08:00:10 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/16 18:46:52 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/17 14:02:02 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,21 +50,21 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@make -C ft_printf
-	@make -C lib
-	@$(CC) $(FLAGS) ./lib/libft.a ./ft_printf/libftprintf.a $(OBJS) -o $(NAME)
+	@make -C libft
+	@$(CC) $(FLAGS) ./libft/libft.a ./ft_printf/libftprintf.a $(OBJS) -o $(NAME)
 	@echo "$(_GREEN)$(NAME) created$(_END)"
 
 %.o : %.c
 		@$(CC) $(FLAGS) -o $@ -c $^
 
 clean :
-		@make clean -C lib
+		@make clean -C libft
 		@make clean -C ft_printf
 		@rm -rf $(OBJS)
 		@echo "$(_RED)clean : $(_GREEN)Done$(_END)"
 
 fclean : clean
-		@make fclean -C lib
+		@make fclean -C libft
 		@make fclean -C ft_printf
 		@rm -rf $(NAME)
 		@echo "$(_RED)fclean : $(_GREEN)Done$(_END)"

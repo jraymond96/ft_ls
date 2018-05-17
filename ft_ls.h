@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/16 16:59:24 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/17 14:06:35 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <time.h>
 # include <stdlib.h>
 # include <dirent.h>
-# include "lib/libft.h"
-# include "./ft_printf/ft_printf.h"
+# include "libft/libft.h"
+# include "ft_printf/ft_printf.h"
 # define PATH ((t_finfo *)elem)
 # define INFP ((t_infp *)root->ptrdata)
 
@@ -104,56 +104,59 @@ typedef struct			s_fileinfo
 **----------------------------------FONCTIONS-----------------------------------
 */
 
-void			ft_handle_mode(struct stat *allstats, t_finfo *file_s);
-void			ft_file_size(struct stat *allstats, t_finfo *file_s,
+void					ft_handle_mode(struct stat *allstats, t_finfo *file_s);
+void					ft_file_size(struct stat *allstats, t_finfo *file_s,
+										t_lenmax *max);
+void					ft_file_time(struct stat *allstats, t_finfo *file_st,
+										int flags);
+void					ft_find_uid_gid(struct stat *allstats, t_finfo *file_st,
+											t_lenmax *max);
+long long int			ft_z(struct stat *allstats, char *path,
+								t_finfo *file_st, t_lenmax *max);
+char					*ft_handle_link(char *path);
+int						ft_strofpoint(char *str);
+int						ft_error(char *path, int nb_arg);
+t_btree					*select_inser(t_btree *root, t_finfo *info,
+										t_lenmax *max);
+void					ft_print_tree(t_btree *root, t_lenmax *max,
+										t_recur *rec);
+t_btree					*ft_take_infofile(char *path, DIR *dir,
+											t_btree **folder, t_lenmax *max);
+int						ft_recur_solve(char *path, DIR *dir, int flags,
+											t_recur *rec);
+t_param					*get_param(char **argv, int flags);
+void					*ptrcmp(int flags);
+void					call_files(t_btree *root, int flags);
+void					ft_free_all(t_btree **root, t_btree **folder, DIR *dir,
 								t_lenmax *max);
-void			ft_file_time(struct stat *allstats, t_finfo *file_st,
-								int flags);
-void			ft_find_uid_gid(struct stat *allstats, t_finfo *file_st,
-									t_lenmax *max);
-long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
-						t_lenmax *max);
-char			*ft_handle_link(char *path);
-int				ft_strofpoint(char *str);
-int				ft_error(char *path, int nb_arg);
-t_btree			*select_inser(t_btree *root, t_finfo *info, t_lenmax *max);
-void			ft_print_tree(t_btree *root, t_lenmax *max, t_recur *rec);
-t_btree			*ft_take_infofile(char *path, DIR *dir, t_btree **folder,
-									t_lenmax *max);
-int				ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec);
-t_param			*get_param(char **argv, int flags);
-void			*ptrcmp(int flags);
-void			call_files(t_btree *root, int flags);
-void			ft_free_all(t_btree **root, t_btree **folder, DIR *dir,
-								t_lenmax *max);
-int				call_lstat(struct stat *allstats, char *path);
-int				call_llstat(struct stat *allstats, char *path);
-char			*tname_file(char *str);
-int				is_empty(t_btree *root, int i);
-int				ft_getinf_term(t_lenmax *max);
+int						call_lstat(struct stat *allstats, char *path);
+int						call_llstat(struct stat *allstats, char *path);
+char					*tname_file(char *str);
+int						is_empty(t_btree *root, int i);
+int						ft_getinf_term(t_lenmax *max);
 
 /*
 **-------------------------------------ptr_fonc_print--------------------------
 */
 
-void			long_print(t_btree *elem, t_lenmax *max);
-void			normal_print(t_btree *elem, t_lenmax *max, int len);
-void			del(void *elem, size_t content_size);
-void			btdel(void *elem);
-void			btdelbis(void *elem);
-int				lst_ncmp(t_list *elem);
-int				lst_tcmp(t_list *elem);
-int				inser_time(void *data1, void *data2);
-int				inser_ascii(void *data1, void *data2);
+void					long_print(t_btree *elem, t_lenmax *max);
+void					normal_print(t_btree *elem, t_lenmax *max, int len);
+void					del(void *elem, size_t content_size);
+void					btdel(void *elem);
+void					btdelbis(void *elem);
+int						lst_ncmp(t_list *elem);
+int						lst_tcmp(t_list *elem);
+int						inser_time(void *data1, void *data2);
+int						inser_ascii(void *data1, void *data2);
 
-int				p_inser_time(void *data1, void *data2);
-int				p_inser_ascii(void *data1, void *data2);
-int				p_inser_size(void *data1, void *data2);
-void			print(void *ptrdata);
-int				astobin(char *arg, int x, int y, int flags);
-void			del_infp(void *ptrdata);
-void			frefre(void *elem);
-void			simpleprint(void *elem);
-void			lprint(void *elem);
+int						p_inser_time(void *data1, void *data2);
+int						p_inser_ascii(void *data1, void *data2);
+int						p_inser_size(void *data1, void *data2);
+void					print(void *ptrdata);
+int						astobin(char *arg, int x, int y, int flags);
+void					del_infp(void *ptrdata);
+void					frefre(void *elem);
+void					simpleprint(void *elem);
+void					lprint(void *elem);
 
 #endif

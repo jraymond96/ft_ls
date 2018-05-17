@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 03:31:01 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/16 18:46:13 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/17 14:04:08 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void		*ptrcmp(int flags)
 
 void		init_info(t_infp *info, struct stat *stats, char *argv)
 {
-			info->name = ft_strdup(argv);
-			info->time = stats->st_mtime;
+	info->name = ft_strdup(argv);
+	info->time = stats->st_mtime;
 }
 
 t_param		*get_param(char **argv, int flags)

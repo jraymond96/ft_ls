@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:33:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/16 19:29:43 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/17 14:43:50 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		init_lenmax(t_recur *rec, DIR *dir, int flags, t_lenmax *max)
 
 	tmp = max->path;
 	if (!dir)
-		return (ft_error(max->path, 3));
+		return (ft_error(max->path, max->flags));
 	ft_bzero(max, sizeof(t_lenmax));
 	max->path = tmp;
 	max->flags = flags;
@@ -57,7 +57,8 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec)
 	root = ft_take_infofile(path, dir, &folder, &lenmax);
 	if (root)
 		ft_print_tree(root, &lenmax, rec);
-	lenmax.path = ft_strjoin(lenmax.path, "/");
+	if (ft_strcmp(path, "./") != 0)
+		lenmax.path = ft_strjoin(lenmax.path, "/");
 	if (flags & MAX_R && folder)
 	{
 		if (flags & MIN_R)
