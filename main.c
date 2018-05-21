@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 01:37:54 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/17 14:27:44 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:44:43 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,5 @@ int		main(int argc, char **argv)
 	else
 		ft_recur_solve("./", opendir("./"), argc, &rec);
 	free_param(&param);
-	while (1);
 	return (0);
 }

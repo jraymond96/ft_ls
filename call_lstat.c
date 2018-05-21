@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 04:27:09 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/17 14:36:58 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/05/21 22:05:22 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 int		call_lstat(struct stat *allstats, char *path)
 {
-	if (lstat(path, allstats) == -1 || !(allstats->st_mode & S_IXUSR))
+	if (lstat(path, allstats) == -1 || (!(allstats->st_mode & S_IXUSR) &&
+				(S_ISDIR(allstats->st_mode))))
 	{
 		if (!(DT_DIR & allstats->st_mode))
 			ft_printf("ls: %s: %s\n", path, strerror(errno));

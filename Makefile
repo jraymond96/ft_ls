@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 08:00:10 by jraymond          #+#    #+#              #
-#    Updated: 2018/05/17 14:02:02 by jraymond         ###   ########.fr        #
+#    Updated: 2018/05/21 16:50:37 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ls
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRCS = 	main.c \
 		get_param.c \
