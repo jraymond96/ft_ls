@@ -60,7 +60,7 @@ int		ft_recur_solve(char *path, DIR *dir, int flags, t_recur *rec)
 	if (ft_strcmp(path, "./") != 0)
 		lenmax.path = ft_strjoin(lenmax.path, "/");
 	else
-		lenmax.path = NULL;
+		lenmax.path = ft_strdup(path);
 	if (flags & MAX_R && folder)
 	{
 		if (flags & MIN_R)

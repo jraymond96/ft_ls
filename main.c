@@ -77,5 +77,6 @@ int		main(int argc, char **argv)
 	else
 		ft_recur_solve("./", opendir("./"), argc, &rec);
 	free_param(&param);
+	while (1);
 	return (0);
 }
