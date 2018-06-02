@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:45:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/16 18:43:30 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/02 22:48:07 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ long long int	ft_z(struct stat *allstats, char *path, t_finfo *file_st,
 		max->lenmax_link = len;
 	ft_zbis(allstats, file_st, max);
 	file_st->max = max;
-	max->total_size += allstats->st_blocks;
+	if (max->flags & MIN_A || file_st->name[0] != '.')
+		max->total_size += allstats->st_blocks;
 	ft_memdel((void **)&all_path);
 	return (allstats->st_blocks);
 }

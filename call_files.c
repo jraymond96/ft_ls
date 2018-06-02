@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 03:14:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/02 21:42:21 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/02 23:26:29 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,12 @@ t_btree	*parsing_files(t_btree *root, int flags, t_lenmax *max, t_btree *rinfo)
 	return (rinfo);
 }
 
-void	print(void *ptr)
-{
-	ft_putendl(((t_infp *)ptr)->name);
-}
-
 void	call_files(t_btree *root, int flags)
 {
 	t_lenmax	max;
 	t_btree		*root_inf;
-	void		*ptr;
 
 	root_inf = NULL;
-	ptr = frefre;
 	ft_bzero(&max, sizeof(t_lenmax));
 	root_inf = parsing_files(root, flags, &max, root_inf);
 	if (flags & MIN_R)
@@ -77,5 +70,5 @@ void	call_files(t_btree *root, int flags)
 		else
 			ft_browsetree(root_inf, simpleprint);
 	}
-	ft_btreedel(&root_inf, ptr);
+	ft_btreedel(&root_inf, frefre);
 }

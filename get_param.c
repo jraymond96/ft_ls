@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 03:31:01 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/02 21:41:34 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/02 23:39:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		init_info(t_infp *info, struct stat *stats, char *argv)
 {
 	info->name = ft_strdup(argv);
 	info->time = stats->st_mtime;
+	info->size = stats->st_size;
 }
 
 t_param		*get_param(char **argv, int flags)

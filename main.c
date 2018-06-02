@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 01:37:54 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/21 16:44:43 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/02 23:27:45 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,17 @@ void	call_recur(t_btree *root, int flags, t_recur *rec, t_btree *end)
 void	call_folder(t_param *param, int flags)
 {
 	t_recur	rec;
+	t_btree	*first;
 
 	if (!param)
 		return ;
 	ft_bzero(&rec, sizeof(t_recur));
 	if (param->file)
+	{
+		first = ft_btreeend(param->dir, -1);
+		ft_printf("%s:\n", ((t_infp *)first->ptrdata)->name);
 		rec.nb_arg = 1;
+	}
 	else
 		rec.nb_arg = ft_btreelen(param->dir, &rec.nb_arg);
 	call_recur(param->dir, flags, &rec, ft_btreeend(param->dir, 1));
@@ -56,12 +61,10 @@ void	free_param(t_param **param)
 int		main(int argc, char **argv)
 {
 	int		ret;
-	void	*ptr;
 	t_param	*param;
 	t_recur	rec;
 
-	ptr = astobin;
-	ret = ft_get_opt(argv, &argc, ptr);
+	ret = ft_get_opt(argv, &argc, astobin);
 	param = NULL;
 	ft_bzero(&rec, sizeof(t_recur));
 	if (ret < 0)
@@ -70,7 +73,10 @@ int		main(int argc, char **argv)
 	{
 		param = get_param(&argv[ret], argc);
 		if (param->file)
+		{
 			call_files(param->file, argc);
+			param->dir ? ft_putchar('\n') : NULL;
+		}
 		if (param->dir)
 			call_folder(param, argc);
 	}
