@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/13 03:14:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/16 18:38:42 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/02 21:42:21 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,15 @@ t_btree	*parsing_files(t_btree *root, int flags, t_lenmax *max, t_btree *rinfo)
 	if (ft_empty_f_info(&info, root, max) == -1)
 		ft_printf("ls: %s\n", strerror(errno));
 	else
-		rinfo = ft_btreeinser(rinfo, &info, sizeof(t_finfo), ptrcmp(flags));
+		rinfo = ft_btreeinser(rinfo, &info, sizeof(t_finfo), ptrcmp1(flags));
 	if (root->right)
 		rinfo = parsing_files(root->right, flags, max, rinfo);
 	return (rinfo);
+}
+
+void	print(void *ptr)
+{
+	ft_putendl(((t_infp *)ptr)->name);
 }
 
 void	call_files(t_btree *root, int flags)

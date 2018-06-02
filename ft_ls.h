@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/05/17 14:06:35 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/02 21:41:29 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int						ft_recur_solve(char *path, DIR *dir, int flags,
 											t_recur *rec);
 t_param					*get_param(char **argv, int flags);
 void					*ptrcmp(int flags);
+void					*ptrcmp1(int flags);
 void					call_files(t_btree *root, int flags);
 void					ft_free_all(t_btree **root, t_btree **folder, DIR *dir,
 								t_lenmax *max);
@@ -152,6 +153,9 @@ int						inser_ascii(void *data1, void *data2);
 int						p_inser_time(void *data1, void *data2);
 int						p_inser_ascii(void *data1, void *data2);
 int						p_inser_size(void *data1, void *data2);
+int						inser_time(void *data1, void *data2);
+int						inser_ascii(void *data1, void *data2);
+int						inser_size(void *data1, void *data2);
 void					print(void *ptrdata);
 int						astobin(char *arg, int x, int y, int flags);
 void					del_infp(void *ptrdata);
