@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 21:35:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/02 23:16:42 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/03 18:13:55 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ long long int			ft_z(struct stat *allstats, char *path,
 								t_finfo *file_st, t_lenmax *max);
 char					*ft_handle_link(char *path);
 int						ft_strofpoint(char *str);
-int						ft_error(char *path, int nb_arg);
+int						ft_error(char *path, int flags, int nb_arg);
 t_btree					*select_inser(t_btree *root, t_finfo *info,
 										t_lenmax *max);
 void					ft_print_tree(t_btree *root, t_lenmax *max,

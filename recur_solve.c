@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 04:33:22 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/02 23:09:06 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/11 20:50:32 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		init_lenmax(t_recur *rec, DIR *dir, int flags, t_lenmax *max)
 
 	tmp = max->path;
 	if (!dir)
-		return (ft_error(max->path, max->flags));
+		return (ft_error(max->path, flags, rec->nb_arg));
 	ft_bzero(max, sizeof(t_lenmax));
 	max->path = tmp;
 	max->flags = flags;
