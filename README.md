@@ -6,7 +6,7 @@ The goal of this project was to recode fonction ls.
 
 ## PRINCIPAL NEW THINGS FOR ME
 
-On this project i tryed to optimise speed and do the most generic structure for adding lot of option easily.
+On this project i tried to optimise speed and do the most generic structure for adding lot of option easily.
 The principal difference of lot's of option are impact of order's display so i choose to used binary tree because when new element comming he was directly sorted like i want.
 
 * creation of Binary tree fonction with pointer of function for the if who determinated if the new element are the left or right son.
