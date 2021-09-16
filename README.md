@@ -10,7 +10,7 @@ On this project i tried to optimise speed and do the most generic structure for 
 The principal difference of lot's of option are impact of order's display so i choose to used binary tree because when new element comming he was directly sorted like i want.
 
 * creation of Binary tree fonction with pointer of function for the if who determinated if the new element are the left or right son.
-* Use bit fields for saving flags than user ask me. Using this systeme is for me the worst because i can stock 8 boolean in int...
+* Use bit fields for saving flags than user ask me. Using this system is for me the worst because i can stock 8 boolean in int...
 
 ** My final graduate on this project is 107/100 **
 
