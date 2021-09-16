@@ -14,7 +14,7 @@ The principal difference of lot's of option are impact of order's display so i c
 
 ** My final graduate on this project is 107/100 **
 
-Cause of extra points : Powerfull of binary tree fonction and speed of my project (most speedy than real ls but normal because i have less option)
+Cause of extra points : Powerfull of binary tree fonction and speed of my project (most speedy than real ls because i have less option)
 
 ## OPTION handled
 
