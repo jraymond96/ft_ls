@@ -12,7 +12,7 @@ The principal difference of lot's of option are impact of order's display so i c
 * creation of Binary tree fonction with pointer of function for the if who determinated if the new element are the left or right son.
 * Use bit fields for saving flags than user ask me. Using this systeme is for me the worst because i can stock 8 boolean in int...
 
-** My final graduate on this project are 107/100 **
+** My final graduate on this project is 107/100 **
 
 Cause of extra points : Powerfull of binary tree fonction and speed of my project (most speedy than real ls but normal because i have less option)
 
